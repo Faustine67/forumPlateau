@@ -35,11 +35,17 @@
                 return $this;
         }
 
+         /**
+         * Get the value of Post Date
+         */ 
         
         public function getPostdate(){
                 $formattedDate = $this->postDate->format("d/m/Y, H:i:s");
                 return $postDate;
         }
+         /**
+         * Set the value of PostDate
+         */ 
         
         public function setPostdate($postdate){
                 $this->postDate = new \DateTime($date);
@@ -67,7 +73,7 @@
         }
 
         /**
-         * Get the value of user
+         * Get the value of Topic
          */ 
         public function getTopic()
         {
@@ -75,7 +81,7 @@
         }
         
         /**
-         * Set the value of user
+         * Set the value of topic
          *
          * @return  self
          */ 
@@ -87,7 +93,7 @@
         }
 
         /**
-        *Get the value of category 
+        *Get the value of user
         */
         public function getUser()
         {
@@ -95,7 +101,7 @@
         }
 
         /**
-         * Set the value of category
+         * Set the value of user
          */
         public function setUser($user)
         {
