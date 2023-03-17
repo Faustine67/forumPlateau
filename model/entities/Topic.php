@@ -1,8 +1,3 @@
-<!-- les propriétés portent le même nom que les champs de la base de données, 
-sauf pour la clé primaire et les clés étrangères où on enlève le "_id" ou "id_" 
-Chaque Entity va hériter de la classe Entity (dans le dossier App) et toutes les Entities auront exactement le même constructeur 
-qui implémente la méthode "hydrate" (de cette même classe Entity)-->
-
 <?php
     namespace Model\Entities;
 
@@ -10,11 +5,13 @@ qui implémente la méthode "hydrate" (de cette même classe Entity)-->
 
     final class Topic extends Entity{
 
-        private $id;
-        private $title;
+        private $topic;
+        private $topicName;
+        private $topicDate;
+        private $locked;
         private $user;
-        private $creationdate;
-        private $closed;
+        private $category;
+
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -25,7 +22,7 @@ qui implémente la méthode "hydrate" (de cette même classe Entity)-->
          */ 
         public function getId()
         {
-                return $this->id;
+                return $this->topic;
         }
 
         /**
@@ -33,80 +30,100 @@ qui implémente la méthode "hydrate" (de cette même classe Entity)-->
          *
          * @return  self
          */ 
-        public function setId($id)
+        public function setId($topic)
         {
-                $this->id = $id;
+                $this->topic = $topic;
 
                 return $this;
         }
 
         /**
-         * Get the value of title
+         * Get the value of Topic Name
          */ 
-        public function getTitle()
+        public function getTopicName()
         {
-                return $this->title;
+                return $this->topicName;
         }
 
         /**
-         * Set the value of title
+         * Set the value of Topic Name
          *
          * @return  self
          */ 
-        public function setTitle($title)
+        public function setTopicName($topicName)
         {
-                $this->title = $title;
+                $this->topicName = $topicName;
 
                 return $this;
         }
 
+        
+        public function getTopicDate(){
+                $formattedDate = $this->topicDate->format("d/m/Y, H:i:s");
+                return $formattedDate;
+        }
+        
+        public function setTopicDate($topicDate){
+                $this->topicDate = new \DateTime($topicDate);
+                return $this;
+        }
+        
         /**
-         * Get the value of user
+         * Get the value of Locked
+         */ 
+        public function getLocked()
+        {
+                return $this->locked;
+        }
+        
+        /**
+         * Set the value of Locked
+         *
+         * @return  self
+         */ 
+        public function setLocked($locked)
+        {
+                $this->locked = $locked;
+                
+                return $this;
+        }
+
+        /**
+         * Get the value of user_id
          */ 
         public function getUser()
         {
                 return $this->user;
         }
-
+        
         /**
-         * Set the value of user
+         * Set the value of user_id
          *
          * @return  self
          */ 
         public function setUser($user)
         {
                 $this->user = $user;
-
+        
                 return $this;
         }
 
-        public function getCreationdate(){
-            $formattedDate = $this->creationdate->format("d/m/Y, H:i:s");
-            return $formattedDate;
-        }
-
-        public function setCreationdate($date){
-            $this->creationdate = new \DateTime($date);
-            return $this;
+        /**
+        *Get the value of category 
+        */
+        public function getCategory()
+        {
+                return $this->category;
         }
 
         /**
-         * Get the value of closed
-         */ 
-        public function getClosed()
+         * Set the value of category
+         */
+        public function setCategory($category)
         {
-                return $this->closed;
-        }
-
-        /**
-         * Set the value of closed
-         *
-         * @return  self
-         */ 
-        public function setClosed($closed)
-        {
-                $this->closed = $closed;
-
+                $this->category = $category;
+        
                 return $this;
         }
-    }
+
+}
