@@ -16,9 +16,7 @@ namespace Controller;
     
     class ForumController extends AbstractController implements ControllerInterface{
 
-        public function index(){
-          
-
+        public function index(){   
            $topicManager = new TopicManager();
     //Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
     //dont hérite chaque controller de l'application)
@@ -28,21 +26,20 @@ namespace Controller;
                     "topics" => $topicManager->findAll(["topicName", "DESC"])
                 ]
             ];
-        
         }
+
         public function listeCategories(){
             $categoryManager = new CategoryManager();
-
             return[
                 "view" => VIEW_DIR."forum/listCategories.php",
-                "data"=>["category"-> $categoryManager => findAll(["categoryName","DESC"])
+                "data"=>[
+                    "category"-> $categoryManager => findAll(["categoryName","DESC"])
                 ]
             ];
         }
 
         public function listeTopicsSelected($id){
             $topicManager = new TopicManager();
-
             return[
                 "view" =>VIEW_DIR."forum/listTopics.php",
                 "data"=>["topics"->$topicManager->findTopicsSelected($id),

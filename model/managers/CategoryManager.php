@@ -3,7 +3,7 @@
     
     use App\Manager;
     use App\DAO;
-    //use Model\Managers\CategoryManager; //
+    use Model\Managers\CategoryManager;
 
     class CategoryManager extends Manager{
 
@@ -15,5 +15,16 @@
             parent::connect();
         }
 
+        // public function find
+        public function findAllCategory(){
+            $sql="SELECT *
+            FROM category
+            ORDER BY categoryName ASC";
+
+            return $this->getMultipleResults(
+                DAO::select($sql,['id'=>$id]),
+                $this->className
+            );
+        }
 
     }

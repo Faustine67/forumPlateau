@@ -1,15 +1,14 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
-$categories = $result["data"]['category'];
+$categories = $result["data"]['categories'];
     
 ?>
 
 <h1>liste categories</h1>
 
 <?php
-foreach($categories as $categories ){
-
+foreach($categories as $category ){
     ?>
-    <p><?=$categories->getCategoryName()?></p>
+    <p><?=$category->getCategoryName() ?></p>
     <?php
 }
