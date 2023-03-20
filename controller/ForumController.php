@@ -33,7 +33,7 @@ namespace Controller;
             return[
                 "view" => VIEW_DIR."forum/listCategories.php",
                 "data"=>[
-                    "category"-> $categoryManager => findAll(["categoryName","DESC"])
+                    "categories"-> $categoryManager->findAll(["categoryName","ASC"])
                 ]
             ];
         }

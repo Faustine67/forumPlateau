@@ -1,6 +1,6 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
-$categories = $result["data"]['categories'];
+$categories = $result["data"]['category'];
     
 ?>
 

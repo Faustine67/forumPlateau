@@ -16,15 +16,15 @@
         }
 
         // public function find
-        public function findAllCategory(){
+        public function findAllCategories(){
             $sql="SELECT *
             FROM category
             ORDER BY categoryName ASC";
 
-            return $this->getMultipleResults(
-                DAO::select($sql,['id'=>$id]),
-                $this->className
-            );
+        return $this->getOneOrNullResult(
+            DAO::select($sql,['categoryName'=>$CategoryName],false),
+            $this->className
+             );
         }
 
     }
