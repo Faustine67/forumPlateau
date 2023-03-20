@@ -5,7 +5,7 @@
 
     final class Topic extends Entity{
 
-        private $id
+        private $id;
         private $topicName;
         private $topicDate;
         private $locked;

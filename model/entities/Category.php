@@ -6,7 +6,7 @@
     final class Category extends Entity{
 
         private $id;
-        private $categoryName
+        private $categoryName;
 
         public function __construct($data){         
             $this->hydrate($data);        

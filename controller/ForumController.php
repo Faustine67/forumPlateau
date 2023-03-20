@@ -23,7 +23,7 @@ namespace Controller;
     //Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
     //dont hérite chaque controller de l'application)
             return [
-                "view" => VIEW_DIR."forum_faustine/listTopics.php",
+                "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
                     "topics" => $topicManager->findAll(["topicName", "DESC"])
                 ]
@@ -34,7 +34,7 @@ namespace Controller;
             $categoryManager = new CategoryManager();
 
             return[
-                "view" => VIEW_DIR."forum_faustine/listCategories.php",
+                "view" => VIEW_DIR."forum/listCategories.php",
                 "data"=>["category"-> $categoryManager => findAll(["categoryName","DESC"])
                 ]
             ];
@@ -44,7 +44,7 @@ namespace Controller;
             $topicManager = new TopicManager();
 
             return[
-                "view" =>VIEW_DIR."forum_faustine/listTopics.php",
+                "view" =>VIEW_DIR."forum/listTopics.php",
                 "data"=>["topics"->$topicManager->findTopicsSelected($id),
                 ]
             ];
@@ -53,10 +53,10 @@ namespace Controller;
             $postManager = new PostManager();
 
             return[
-                "view"=> VIEW_DIR."forum_faustine/listPost.php",
-                "data"=>["post"=>$PostManager->listePostsSelected($id)
+                "view"=> VIEW_DIR."forum/listPost.php",
+                "data"=>["post"=>$PostManager->listePostsSelected($id),
                 ]
-            ]
+            ];
         }
         
         }
