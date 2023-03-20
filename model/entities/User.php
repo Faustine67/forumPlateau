@@ -5,7 +5,7 @@
 
     final class User extends Entity{
 
-        private $user;
+        private $id;
         private $nickname;
         private $email;
         private $password;
@@ -21,7 +21,7 @@
          */ 
         public function getId()
         {
-                return $this->user;
+                return $this->id;
         }
 
         /**
@@ -29,9 +29,9 @@
          *
          * @return  self
          */ 
-        public function setId($user)
+        public function setId($id)
         {
-                $this->user = $user;
+                $this->user = $id;
 
                 return $this;
         }
@@ -98,10 +98,16 @@
             return $this;
         }
         
+         /**
+         * Get the value of Inscription Date
+         */ 
         public function getInscriptionDate(){
                 $formattedDate = $this->inscriptionDate->format("d/m/Y, H:i:s");
                 return $inscriptionDate;
         }
+         /**
+         * Set the value of Inscription Date
+         */ 
         
         public function setInscriptiondate($inscriptionDate){
                 $this->inscriptionDate = new \DateTime($inscriptionDate);

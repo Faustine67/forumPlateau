@@ -21,8 +21,6 @@
                 ];
             }
             
-        
-   
         public function users(){
             $this->restrictTo("ROLE_USER");
 

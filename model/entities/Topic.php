@@ -5,7 +5,7 @@
 
     final class Topic extends Entity{
 
-        private $topic;
+        private $id
         private $topicName;
         private $topicDate;
         private $locked;
@@ -22,7 +22,7 @@
          */ 
         public function getId()
         {
-                return $this->topic;
+                return $this->id;
         }
 
         /**
@@ -30,9 +30,9 @@
          *
          * @return  self
          */ 
-        public function setId($topic)
+        public function setId($id)
         {
-                $this->topic = $topic;
+                $this->id = $id;
 
                 return $this;
         }
@@ -57,11 +57,16 @@
                 return $this;
         }
 
-        
+         /**
+         * Get the value of Topic Date
+         */ 
         public function getTopicDate(){
                 $formattedDate = $this->topicDate->format("d/m/Y, H:i:s");
                 return $formattedDate;
         }
+         /**
+         * Set the value of Topic Date
+         */ 
         
         public function setTopicDate($topicDate){
                 $this->topicDate = new \DateTime($topicDate);

@@ -45,7 +45,7 @@ namespace Controller;
 
             return[
                 "view" =>VIEW_DIR."forum_faustine/listTopics.php",
-                "data"=>["topic"->$topicManager->listeTopicsSelected($id),
+                "data"=>["topics"->$topicManager->findTopicsSelected($id),
                 ]
             ];
             }
