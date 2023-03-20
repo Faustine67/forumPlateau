@@ -46,7 +46,7 @@
          *
          * @return  self
          */ 
-        public function setContent($categoryName)
+        public function setCategoryName($categoryName)
         {
                 $this->categoryName = $categoryName;
                 

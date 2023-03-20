@@ -34,6 +34,7 @@
     }
     $ctrl = new $ctrlNS();
 
+    // var_dump($_GET['action']);die;
     $action = "index";//action par défaut de n'importe quel contrôleur
     //si l'action est présente dans l'url ET que la méthode correspondante existe dans le ctrl
     if(isset($_GET['action']) && method_exists($ctrl, $_GET['action'])){

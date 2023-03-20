@@ -28,12 +28,12 @@ namespace Controller;
             ];
         }
 
-        public function listeCategories(){
+        public function listCategories(){
             $categoryManager = new CategoryManager();
             return[
                 "view"=> VIEW_DIR."forum/listCategories.php",
                 "data"=>[
-                    "categories"=>$categoryManager->findAll(["categoryName","ASC"])
+                    "categories"=>$categoryManager->findAll()
                 ]
             ];
         }
