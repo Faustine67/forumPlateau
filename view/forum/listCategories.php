@@ -1,6 +1,8 @@
+
 <?php
+//var_dump($categories);die;
 // Exemple de comment recuperer les données envoyées par le controller //
-$categories = $result["data"]['category'];
+$categories = $result["data"]['categories'];
     
 ?>
 

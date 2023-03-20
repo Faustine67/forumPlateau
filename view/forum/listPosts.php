@@ -1,6 +1,6 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
-$posts = $result["data"]['post'];
+$posts = $result["data"]['posts'];
     
 ?>
 

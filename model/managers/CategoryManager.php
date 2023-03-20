@@ -15,7 +15,7 @@
             parent::connect();
         }
 
-        // public function find
+        //Afficher toutes les categories
         public function findAllCategories(){
             $sql="SELECT *
             FROM category

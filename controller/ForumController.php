@@ -22,8 +22,8 @@ namespace Controller;
     //dont hérite chaque controller de l'application)
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
-                "data" => [
-                    "topics" => $topicManager->findAll(["topicName", "DESC"])
+                "data"=> [
+                    "topics"=>$topicManager->findAll(["topicName", "DESC"])
                 ]
             ];
         }
@@ -31,9 +31,9 @@ namespace Controller;
         public function listeCategories(){
             $categoryManager = new CategoryManager();
             return[
-                "view" => VIEW_DIR."forum/listCategories.php",
+                "view"=> VIEW_DIR."forum/listCategories.php",
                 "data"=>[
-                    "categories"-> $categoryManager->findAll(["categoryName","ASC"])
+                    "categories"=>$categoryManager->findAll(["categoryName","ASC"])
                 ]
             ];
         }
@@ -41,8 +41,9 @@ namespace Controller;
         public function listeTopicsSelected($id){
             $topicManager = new TopicManager();
             return[
-                "view" =>VIEW_DIR."forum/listTopics.php",
-                "data"=>["topics"->$topicManager->findTopicsSelected($id),
+                "view"=>VIEW_DIR."forum/listTopics.php",
+                "data"=>[
+                    "topics"=>$topicManager->findTopicsSelected($id),
                 ]
             ];
             }
@@ -51,7 +52,8 @@ namespace Controller;
 
             return[
                 "view"=> VIEW_DIR."forum/listPost.php",
-                "data"=>["post"=>$PostManager->listePostsSelected($id),
+                "data"=>[
+                    "post"=>$PostManager->listePostsSelected($id),
                 ]
             ];
         }
