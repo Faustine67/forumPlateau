@@ -35,9 +35,9 @@ namespace Controller;
 
             return[
                 "view" => VIEW_DIR."forum_faustine/listCategories.php",
-                "data"=>["category"=> $categoryManager => findAll(["categoryName","DESC"])
+                "data"=>["category"-> $categoryManager => findAll(["categoryName","DESC"])
                 ]
-                ];
+            ];
         }
 
         public function listeTopicsSelected($id){
@@ -45,11 +45,10 @@ namespace Controller;
 
             return[
                 "view" =>VIEW_DIR."forum_faustine/listTopics.php",
-                "data"=>["topic"=>$topicManager->listeTopicsSelected($id)
+                "data"=>["topic"->$topicManager->listeTopicsSelected($id),
                 ]
-            ]
-        }
-
+            ];
+            }
         public function listePostsSelected($id){
             $postManager = new PostManager();
 
@@ -60,5 +59,4 @@ namespace Controller;
             ]
         }
         
-
-    }
+        }
