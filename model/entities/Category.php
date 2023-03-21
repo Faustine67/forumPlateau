@@ -34,7 +34,7 @@
 
         
         /**
-         * Get the value of content
+         * Get the value of contentcategoryname
          */ 
         public function getCategoryName()
         {
@@ -42,7 +42,7 @@
         }
         
         /**
-         * Set the value of content
+         * Set the value of categoryname
          *
          * @return  self
          */ 

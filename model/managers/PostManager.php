@@ -17,10 +17,11 @@
 
         public function findPostByTopic($id){
 
-            $sql="SELECT id_post, postDate,content,nickname
+            $sql="SELECT postDate,content,nickname
                     FROM ".$this->tableName."
                     INNER JOIN user ON post.user_id=user.id_user
-                    WHERE topic_id=:id"
+                    WHERE topic_id=:id
+                    ORDER BY postDate DESC";
             
             return $this->getMultipleResults(
                 DAO::select($sql,['id'=>$id]),

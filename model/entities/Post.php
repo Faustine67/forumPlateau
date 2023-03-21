@@ -114,15 +114,15 @@
         *Get the value of Nickname, found in table user
         */
         public function getNickName(){
-                return $this->user->getNickName();
+                return $this->user->$nickname;
         }
          /**
          * Set the value of Nickname
          */
 
-         public function setNickName($user)
+         public function setNickName($nickname)
         {
-                $this->user = $user;
+                $this->nickname = $nickname;
         
                 return $this;
         }

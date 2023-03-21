@@ -51,9 +51,9 @@ namespace Controller;
             $postManager = new PostManager();
 
             return[
-                "view"=> VIEW_DIR."forum/listPost.php",
+                "view"=> VIEW_DIR."forum/listPosts.php",
                 "data"=>[
-                    "post"=>$PostManager->listePostsSelected($id),
+                    "posts"=>$postManager->listePostsSelected($id),
                 ]
             ];
         }

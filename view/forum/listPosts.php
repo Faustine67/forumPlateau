@@ -10,10 +10,9 @@ $posts = $result["data"]['posts'];
 foreach($posts as $post ){
 
     ?>
-    <p><?=post->getTopic()?></p>
+    <p><?=$post->getTopic()?></p>
+    <p><?=$post->getNickName()?></p>
     <p><?=$post->getPostdate()?></p>
     <p><?=$post->getContent()?></p>
-    <p><?=$post->getUser()?></p>
-    <p><?=$post->getPostdate()?></p>
     <?php
 }
