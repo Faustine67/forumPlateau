@@ -17,8 +17,9 @@
 
         public function findPostByTopic($id){
 
-            $sql="SELECT *
+            $sql="SELECT id_post, postDate,content,nickname
                     FROM ".$this->tableName."
+                    INNER JOIN user ON post.user_id=user.id_user
                     WHERE topic_id=:id"
             
             return $this->getMultipleResults(

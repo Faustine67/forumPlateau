@@ -109,4 +109,25 @@
         
                 return $this;
         }
+
+        /**
+        *Get the value of Nickname, found in table user
+        */
+        public function getNickName(){
+                return $this->user->getNickName();
+        }
+         /**
+         * Set the value of Nickname
+         */
+
+         public function setNickName($user)
+        {
+                $this->user = $user;
+        
+                return $this;
+        }
+
+
+
+
 }
