@@ -17,45 +17,79 @@ namespace Controller;
     class ForumController extends AbstractController implements ControllerInterface{
 
         public function index(){   
-           $topicManager = new TopicManager();
+           $categoryManager = new CategoryManager();
     //Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
     //dont hérite chaque controller de l'application)
             return [
-                "view" => VIEW_DIR."forum/listTopics.php",
+                "view" => VIEW_DIR."forum/listCategories.php",
                 "data"=> [
-                    "topics"=>$topicManager->findAll(["topicName", "DESC"])
+                    "categories"=>$categoryManager->findAll(["categoryName", "DESC"])
                 ]
             ];
         }
-
-        public function listCategories(){
+        public function listTopics() {
             $categoryManager = new CategoryManager();
-            return[
-                "view"=> VIEW_DIR."forum/listCategories.php",
-                "data"=>[
-                    "categories"=>$categoryManager->findAll()
+            $categories = $categoryManager->findAll(["categoryName", "DESC"]);
+            
+            $topicManager = new TopicManager();
+            if(isset($_GET['id'])) {
+                $topics = $topicManager->findByCategory($_GET['id']);
+            } else {
+                $topics = $topicManager->findAll(["topicName", "DESC"]);
+            }
+            
+            return [
+                "view" => VIEW_DIR."forum/listTopics.php",
+                "data" => [
+                    "categories" => $categories,
+                    "topics" => $topics
                 ]
             ];
         }
+        // public function listTopics(){
+        //     $topicManager = new TopicManager();
+        //     $categoryManager= new CategoryManager();
+        //     return[
+        //         "view"=> VIEW_DIR."forum/listTopics.php",
+        //         "data"=>[
+        //             "topics"=>$topicManager->findAll(["topicName","DESC"]),
+        //             "categories"=>$categoryManager->findAll(["categoryName","DESC"])
+        //         ]
+        //     ];
+        // }
 
-        public function listeTopicsSelected($id){
+        public function TopicSelected($id){
+            $categoryManager= new CategoryManager();
             $topicManager = new TopicManager();
+            if($id){
+        
             return[
                 "view"=>VIEW_DIR."forum/listTopics.php",
                 "data"=>[
-                    "topics"=>$topicManager->findTopicsSelected($id),
+                    "category"=>$categoryManager->findAll(["categoryName","DESC"]),
+                    "topics"=>$topicManager->listTopicSelected($id),
                 ]
             ];
+            } else{
+                return[
+                    "view"=>VIEW_DIR."forum/listTopics.php",
+                    "data"=>[
+                        "category"=>$categoryManager->findAll(["categoryName","DESC"]),
+                        "topics"=>$topicManager->findAll(["topicName","DESC"]),
+                    ]
+                    ];
+                }
             }
-        public function listePostsSelected($id){
-            $postManager = new PostManager();
 
-            return[
-                "view"=> VIEW_DIR."forum/listPosts.php",
-                "data"=>[
-                    "posts"=>$postManager->listePostsSelected($id),
-                ]
-            ];
-        }
+        // public function listePostsSelected($id){
+        //     $postManager = new PostManager();
+
+        //     return[
+        //         "view"=> VIEW_DIR."forum/listPosts.php",
+        //         "data"=>[
+        //             "posts"=>$postManager->listePostsSelected($id),
+        //         ]
+        //     ];
+        // }
         
         }
