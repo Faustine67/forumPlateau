@@ -27,13 +27,13 @@ namespace Controller;
                 ]
             ];
         }
-        public function listTopics() {
+        public function listTopics($id) {
             $categoryManager = new CategoryManager();
             $categories = $categoryManager->findAll(["categoryName", "DESC"]);
             
             $topicManager = new TopicManager();
-            if(isset($_GET['id'])) {
-                $topics = $topicManager->findByCategory($_GET['id']);
+            if(isset($id)) {
+                $topics = $topicManager->findTopicSelected($id);
             } else {
                 $topics = $topicManager->findAll(["topicName", "DESC"]);
             }

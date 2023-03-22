@@ -9,12 +9,10 @@ $topics = $result["data"]['topics'];
 
 <?php
 foreach($topics as $topic ){
-    <?php if($topic->getCategory()->getId() == $category->getId()): ?>
-        <p><?= $topic->getTopicName() ?></p>
     ?>
+    <p><?=$topic->getTopicName()?></p>
     <?php
 }
-
 
 
   

@@ -26,5 +26,4 @@
             $this->className
              );
         }
-
     }

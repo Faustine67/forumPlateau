@@ -19,11 +19,11 @@
         public function findTopicSelected($id){
             $sql="SELECT *
             FROM ".$this->$tableName."
-            WHERE category_id=:id,
+            WHERE category_id = :id
             ORDER BY topicDate DESC";
 
             return $this-> getMultipleResults(
-                DAO::select($sql,['id'=>$id]),
+                DAO::select($sql,['id'=>$id],true),
                 $this->className
             );
         }

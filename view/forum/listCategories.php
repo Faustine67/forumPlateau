@@ -7,11 +7,12 @@ $categories = $result["data"]['categories'];
 
 <h1>liste categories</h1>
 
+
+
 <?php
 
 foreach($categories as $category ){
-    
     ?>
-    <p><a href="index.php?ctrl=forum&action=listCategories&id=<?=$category->getId()?>"><?=$category->getCategoryName()?></a>
+    <p><a href="index.php?ctrl=forum&action=listTopics&id=<?=$category->getId()?>"><?=$category->getCategoryName()?></a>
     <?php
 }
