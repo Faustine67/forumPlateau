@@ -29,7 +29,7 @@ namespace Controller;
         }
         public function listTopics($id) {
             $categoryManager = new CategoryManager();
-            $categories = $categoryManager->findAll(["categoryName", "DESC"]);
+            $categorie = $categoryManager->findONeById($id);
             
             $topicManager = new TopicManager();
             if(isset($id)) {
@@ -41,7 +41,7 @@ namespace Controller;
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
-                    "categories" => $categories,
+                    "categorie" => $categorie,
                     "topics" => $topics
                 ]
             ];
@@ -66,7 +66,7 @@ namespace Controller;
             return[
                 "view"=>VIEW_DIR."forum/listTopics.php",
                 "data"=>[
-                    "category"=>$categoryManager->findAll(["categoryName","DESC"]),
+                    "categorie"=>$categoryManager->findAll(["categoryName","DESC"]),
                     "topics"=>$topicManager->listTopicSelected($id),
                 ]
             ];
@@ -74,7 +74,7 @@ namespace Controller;
                 return[
                     "view"=>VIEW_DIR."forum/listTopics.php",
                     "data"=>[
-                        "category"=>$categoryManager->findAll(["categoryName","DESC"]),
+                        "categorie"=>$categoryManager->findAll(["categoryName","DESC"]),
                         "topics"=>$topicManager->findAll(["topicName","DESC"]),
                     ]
                     ];

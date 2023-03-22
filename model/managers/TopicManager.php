@@ -16,9 +16,9 @@
         }
 
         //Affichage des topics d'une categorie, classés par date
-        public function findTopicSelected($id){
+        public function listTopicSelected($id){
             $sql="SELECT *
-            FROM ".$this->$tableName."
+            FROM ".$this->tableName."
             WHERE category_id = :id
             ORDER BY topicDate DESC";
 

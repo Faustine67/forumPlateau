@@ -13,6 +13,6 @@ $categories = $result["data"]['categories'];
 
 foreach($categories as $category ){
     ?>
-    <p><a href="index.php?ctrl=forum&action=listTopics&id=<?=$category->getId()?>"><?=$category->getCategoryName()?></a>
+    <p><a href="index.php?ctrl=forum&action=TopicSelected&id=<?=$category->getId()?>"><?=$category->getCategoryName()?></a>
     <?php
 }
