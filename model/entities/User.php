@@ -51,7 +51,7 @@
          */ 
         public function setNickname($nickname)
         {
-                $this->topicName = $topicName;
+                $this->nickname = $nickname;
 
                 return $this;
         }

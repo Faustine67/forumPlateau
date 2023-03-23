@@ -2,7 +2,6 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
 $categories = $result["data"]['categories'];
-// $topics= $result["data"]['topics'];    
 ?>
 
 <h1>liste categories</h1>
@@ -13,6 +12,6 @@ $categories = $result["data"]['categories'];
 
 foreach($categories as $category ){
     ?>
-    <p><a href="index.php?ctrl=forum&action=TopicSelected&id=<?=$category->getId()?>"><?=$category->getCategoryName()?></a>
+    <p><a href="index.php?ctrl=forum&action=topicSelected&id=<?=$category->getId()?>"><?=$category->getCategoryName()?></a>
     <?php
 }

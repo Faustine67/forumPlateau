@@ -41,14 +41,14 @@
         
         public function getPostdate(){
                 $formattedDate = $this->postDate->format("d/m/Y, H:i:s");
-                return $postDate;
+                return $formattedDate;
         }
          /**
          * Set the value of PostDate
          */ 
         
-        public function setPostdate($postdate){
-                $this->postDate = new \DateTime($date);
+        public function setPostdate($postDate){
+                $this->postDate = new \DateTime($postDate);
                 return $this;
         }
         
@@ -73,7 +73,7 @@
         }
 
         /**
-         * Get the value of Topic
+         * Get the value of Topic_id
          */ 
         public function getTopic()
         {
@@ -81,7 +81,7 @@
         }
         
         /**
-         * Set the value of topic
+         * Set the value of topic_id
          *
          * @return  self
          */ 
@@ -110,22 +110,22 @@
                 return $this;
         }
 
-        /**
-        *Get the value of Nickname, found in table user
-        */
-        public function getNickName(){
-                return $this->user->$nickname;
-        }
-         /**
-         * Set the value of Nickname
-         */
+        // /**
+        // *Get the value of Nickname, found in table user
+        // */
+        // public function getNickName(){
+        //         return $this->user->nickname;
+        // }
+        //  /**
+        //  * Set the value of Nickname
+        //  */
 
-         public function setNickName($nickname)
-        {
-                $this->nickname = $nickname;
+        //  public function setNickName($nickname)
+        // {
+        //         $this->nickname = $nickname;
         
-                return $this;
-        }
+        //         return $this;
+        // }
 
 
 

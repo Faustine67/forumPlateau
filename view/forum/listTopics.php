@@ -9,9 +9,12 @@ $topics = $result["data"]['topics'];
 
 <?php
 foreach($topics as $topic ){
+    
     ?>
-    <p><?=$topic->getTopicName()?></p>
-    <?php
+    <p><a href="index.php?ctrl=forum&action=postSelected&id=<?=$topic->getId()?>"><?=$topic->getTopicName()?></a>
+    <p> Crée le : <?=$topic-> getTopicDate() ?></p>
+    <p> Crée par : <?=$topic-> getUser()->getNickname() ?></p>
+        <?php
 }
 
 

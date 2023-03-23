@@ -1,18 +1,19 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
-$posts = $result["data"]['posts'];
-    
+$topics = $result["data"]["topics"];
+$posts = $result["data"]['posts'];   
+
 ?>
 
 <h1>liste posts</h1>
 
 <?php
-foreach($posts as $post ){
-
+//foreach($posts as $post ){
+    //var_dump($post);die;
     ?>
-    <p><?=$post->getTopic()?></p>
-    <p><?=$post->getNickName()?></p>
-    <p><?=$post->getPostdate()?></p>
+    <p>Appartient au topic: <?=$post->getTopic()?></p>
+    <p>Créé par :<?=$post->getUser()?></p>
+    <p>Créé le <?=$post->getPostdate()?></p>
     <p><?=$post->getContent()?></p>
     <?php
-}
+//}

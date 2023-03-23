@@ -3,8 +3,7 @@
     
     use App\Manager;
     use App\DAO;
-    //use Model\Managers\UserManager; //
-
+    
     class UserManager extends Manager{
 
         protected $className = "Model\Entities\User";
@@ -15,5 +14,15 @@
             parent::connect();
         }
 
+        public function listInfoUser($id){
+                $sql = "SELECT *
+                FROM '.$this->tableName.'
+                WHERE user_id = :id";
 
+        return $this->getMultipleResults(
+            DAO::select($sql, ['id' => $id], true), 
+            $this->className
+                    );
+
+        }
     }

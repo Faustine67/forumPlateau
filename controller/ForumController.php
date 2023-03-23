@@ -18,8 +18,8 @@ namespace Controller;
 
         public function index(){   
            $categoryManager = new CategoryManager();
-    //Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
-    //dont hérite chaque controller de l'application)
+            //Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
+            //dont hérite chaque controller de l'application)
             return [
                 "view" => VIEW_DIR."forum/listCategories.php",
                 "data"=> [
@@ -46,50 +46,72 @@ namespace Controller;
                 ]
             ];
         }
-        // public function listTopics(){
-        //     $topicManager = new TopicManager();
-        //     $categoryManager= new CategoryManager();
-        //     return[
-        //         "view"=> VIEW_DIR."forum/listTopics.php",
-        //         "data"=>[
-        //             "topics"=>$topicManager->findAll(["topicName","DESC"]),
-        //             "categories"=>$categoryManager->findAll(["categoryName","DESC"])
-        //         ]
-        //     ];
-        // }
 
-        public function TopicSelected($id){
+        public function topicSelected($id){
             $categoryManager= new CategoryManager();
             $topicManager = new TopicManager();
+
             if($id){
         
-            return[
-                "view"=>VIEW_DIR."forum/listTopics.php",
-                "data"=>[
-                    "categorie"=>$categoryManager->findAll(["categoryName","DESC"]),
-                    "topics"=>$topicManager->listTopicSelected($id),
-                ]
-            ];
+                return[
+                    "view"=>VIEW_DIR."forum/listTopics.php",
+                    "data"=>[
+                        "categorie"=>$categoryManager->findAll(["categoryName","DESC"]),
+                        "topics"=>$topicManager->listTopicSelected($id),
+                    ]
+                ];
             } else{
+
                 return[
                     "view"=>VIEW_DIR."forum/listTopics.php",
                     "data"=>[
                         "categorie"=>$categoryManager->findAll(["categoryName","DESC"]),
                         "topics"=>$topicManager->findAll(["topicName","DESC"]),
                     ]
-                    ];
-                }
+                 ];
             }
-
-        // public function listePostsSelected($id){
-        //     $postManager = new PostManager();
-
-        //     return[
-        //         "view"=> VIEW_DIR."forum/listPosts.php",
-        //         "data"=>[
-        //             "posts"=>$postManager->listePostsSelected($id),
-        //         ]
-        //     ];
-        // }
-        
         }
+
+        public function postSelected($id){
+            $topicManager= new TopicManager();
+            $postManager = new PostManager();
+
+            if($id){
+
+                return[
+                    "view"=> VIEW_DIR."forum/listPosts.php",
+                    "data"=>[
+                        "topics"=>$topicManager->findAll(["topicName","DESC"]),
+                        "posts"=>$postManager->listPostSelected($id),
+                    ]
+                ];
+
+            } else{
+                return[
+                    "view"=>VIEW_DIR."forum/listTopics.php",
+                    "data"=>[
+                        "topics"=>$topicManager->findAll(["topicName","DESC"]),
+                        "posts"=>$postManager->findAll(["content","DESC"]),
+                        "error"=>"Le topic n'existe pas",
+                    ]
+
+                ];
+            }
+        }
+
+        // public function detailUser($id){
+          
+        //     $userManager = new UserManager();
+        //     $PostManager = new PostManager();
+ 
+        //      return [
+        //          "view" => VIEW_DIR."forum/detailUser.php",
+        //          "data" => [
+        //              "user" => $userManager->findOneById($id),
+        //              "posts" => $postManager->listPostSelected($id)
+        //          ]
+        //      ];
+         
+        // }
+
+    }
