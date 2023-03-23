@@ -81,7 +81,7 @@ namespace Controller;
                 return[
                     "view"=> VIEW_DIR."forum/listPosts.php",
                     "data"=>[
-                        "topics"=>$topicManager->findAll(["topicName","DESC"]),
+                        "topics"=>$topicManager->findOnebyId($id),
                         "posts"=>$postManager->listPostSelected($id),
                     ]
                 ];
