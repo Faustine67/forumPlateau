@@ -99,6 +99,25 @@ namespace Controller;
             }
         }
 
+        public function addNewTopic($id){
+          
+            $TopicManager = new TopicManager();
+            $PostManager = new PostManager();
+ 
+            if(isset($_POST['submit'])) {
+
+                $topicName = filter_input(INPUT_POST, "topicName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $user = filter_input(INPUT_POST, "user", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                if($topicName && $user) {
+
+                    $newTopic = $TopicManager->add(["topicName" => $topicName, "category_id" => $id,"user_id" => $user]);                    $this->redirectTo('topic', $newTopic);
+                }
+            }
+         
+        }
+
+
         // public function detailUser($id){
           
         //     $userManager = new UserManager();

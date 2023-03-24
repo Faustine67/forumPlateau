@@ -16,6 +16,11 @@ foreach($topics as $topic ){
     <p> Crée par : <?=$topic-> getUser()->getNickname() ?></p>
         <?php
 }
+?>
 
+<p>Ajouter un nouveau Topic</p>
 
-  
+<form action=index.php?ctrl=topic&action=addNewTopic&id method="post">
+    <input type="text" name="TopicTitle" maxlength="50" placeholder="Topic" required>
+    <input type="submit" name="submit" value="Ajouter">
+    </form>
