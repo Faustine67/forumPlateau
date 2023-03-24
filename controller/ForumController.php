@@ -101,7 +101,6 @@ namespace Controller;
 
         public function addNewTopic($id){
             $TopicManager = new TopicManager();
-            $PostManager = new PostManager();
  
             if(isset($_POST['submit'])) {
                 
@@ -112,6 +111,24 @@ namespace Controller;
                     
                     $newTopic = $TopicManager->add(["topicName" => $topicName, "category_id" => $id,"user_id" => $user]);                    
                     $this->redirectTo('topic', $newTopic);
+                }
+            }
+         
+        }
+
+        public function addNewPost($id){
+            $TopicManager = new TopicManager();
+            $PostManager = new PostManager();
+ 
+            if(isset($_POST['submit'])) {
+                
+                $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $user = 1;
+                
+                if($content && $user) {
+                    
+                    $newPost = $PostManager->add(["content" => $content, "topic_id" => $id,"user_id" => $user]);                    
+                    $this->redirectTo('post', $newPost);
                 }
             }
          

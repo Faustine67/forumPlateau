@@ -19,3 +19,10 @@ foreach($posts as $post ){
     <p><?=$post->getContent()?></p>
     <?php
 }
+?>
+
+<p>Ajouter un nouveau Post au topic "<?=$post->getTopic()->getTopicName()?>"</p>
+<form action="index.php?ctrl=forum&action=addNewPost&id=<?= $topics->getId() ?>" method="POST">
+    <input type="text" name="content" maxlength="50" placeholder="Post" required>
+    <input type="submit" name="submit" value="Ajouter">
+</form>

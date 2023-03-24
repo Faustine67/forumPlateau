@@ -25,5 +25,15 @@
                 $this->className
             );
         }
-    
+
+        //Ajouter une nouveau post dans un topic
+        public function addNewPost($id){
+            $sql="INSERT INTO post (content)
+            VALUES (:post)";
+            
+            return $this-> getMultipleResults(
+                DAO::select($sql,['id'=>$id],true),
+                $this->className
+            );
+        }
         }
