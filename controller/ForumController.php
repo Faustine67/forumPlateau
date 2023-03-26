@@ -160,14 +160,12 @@ namespace Controller;
  
         if(isset($_POST['submit'])) {
             
-            $topicName = filter_input(INPUT_POST, "topicName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $user = 1;
-            
-            if($topicName && $user) {
+            // $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // $user = 1;
                 
-                $newTopic = $TopicManager->delete(["topicName" => $topicName, "category_id" => $id,"user_id" => $user]);                    
+                $newTopic = $TopicManager->deleteTopic($id);                    
                 $this->redirectTo('topic', $newTopic);
-            }
+            
         }
      
     }

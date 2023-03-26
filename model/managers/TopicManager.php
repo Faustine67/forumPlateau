@@ -39,13 +39,10 @@
 
         //Supprimer un topic
         public function deleteTopic($id){
-            $sql="DELETE FROM  topic (topicName)
-            VALUES (:topicName)";
-        
-            return $this-> delete(
-            DAO::delete($sql,['id'=>$id],true),
-            $this->className
-        );
-    }
+            
+            
+            $this->delete($id);
+            
+        }
 
     }

@@ -25,7 +25,7 @@ foreach($topics as $topic ){
 </form>
 
 <p>Supprimer un topic </p>
-<form action="index.php?ctrl=forum&action=deleteTopic&id=<?= $categorie->getId() ?>" method="POST">
+<form action="index.php?ctrl=forum&action=deleteTopic&id=11" method="POST">
     <input type="text" name="topicName" maxlength="50" placeholder="Topic" required/>
     <input type="submit" name="submit" value="Supprimer"/>
 </form>
