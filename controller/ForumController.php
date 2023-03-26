@@ -23,15 +23,19 @@ namespace Controller;
             return [
                 "view" => VIEW_DIR."forum/listCategories.php",
                 "data"=> [
-                    "categories"=>$categoryManager->findAll(["categoryName", "DESC"])
+                    "categories"=>$categoryManager->findAllCategories()
                 ]
             ];
         }
+
+        //Afficher tous les topics par catégorie
         public function listTopics($id) {
             $categoryManager = new CategoryManager();
             $categorie = $categoryManager->findONeById($id);
             
             $topicManager = new TopicManager();
+            //'if(isset($id) = Si l'id de category est different de nul alors premier if, sinon on utilise else
+            // Si le parametre id (de category) n'est pas null, alors on affiche les topics qui lui appartiennent, sinon on affiche tous les topics
             if(isset($id)) {
                 $topics = $topicManager->findTopicSelected($id);
             } else {
@@ -99,6 +103,23 @@ namespace Controller;
             }
         }
 
+        public function addNewCategory(){
+            $CategoryManager = new CategoryManager();
+ 
+            if(isset($_POST['submit'])) {
+                
+                $categoryName = filter_input(INPUT_POST, "categoryName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $user = 1;
+                
+                if($categoryName && $user) {
+                    
+                    $newCategory = $CategoryManager->add(["categoryName" => $categoryName,"user_id" => $user]);                    
+                    $this->redirectTo('category', $newCategory);
+                }
+            }
+         
+        }
+
         public function addNewTopic($id){
             $TopicManager = new TopicManager();
  
@@ -133,6 +154,24 @@ namespace Controller;
             }
          
         }
+
+        public function deleteTopic($id){
+        $TopicManager = new TopicManager();
+ 
+        if(isset($_POST['submit'])) {
+            
+            $topicName = filter_input(INPUT_POST, "topicName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $user = 1;
+            
+            if($topicName && $user) {
+                
+                $newTopic = $TopicManager->delete(["topicName" => $topicName, "category_id" => $id,"user_id" => $user]);                    
+                $this->redirectTo('topic', $newTopic);
+            }
+        }
+     
+    }
+
 
 
         // public function detailUser($id){

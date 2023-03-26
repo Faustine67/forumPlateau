@@ -18,8 +18,14 @@ foreach($topics as $topic ){
 }
 ?>
 
-<p>Ajouter un nouveau Topic à la catégorie "<?=$topic->getCategory()->getCategoryName()?>"</p>
+<p>Ajouter un nouveau Topic</p>
 <form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId() ?>" method="POST">
-    <input type="text" name="topicName" maxlength="50" placeholder="Topic" required>
-    <input type="submit" name="submit" value="Ajouter">
+    <input type="text" name="topicName" maxlength="50" placeholder="Topic" required/>
+    <input type="submit" name="submit" value="Ajouter"/>
+</form>
+
+<p>Supprimer un topic </p>
+<form action="index.php?ctrl=forum&action=deleteTopic&id=<?= $categorie->getId() ?>" method="POST">
+    <input type="text" name="topicName" maxlength="50" placeholder="Topic" required/>
+    <input type="submit" name="submit" value="Supprimer"/>
 </form>

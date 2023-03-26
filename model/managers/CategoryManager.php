@@ -21,9 +21,18 @@
             FROM category
             ORDER BY categoryName ASC";
 
-        return $this->getOneOrNullResult(
-            DAO::select($sql,['categoryName'=>$CategoryName],false),
-            $this->className
-             );
+        return $this->getMultipleResults(
+            DAO::select($sql),$this->className);
+        }
+
+        //AJouter une category
+        public function addNewCategory(){
+            $sql="INSERT INTO category (categoryName)
+            VALUES (:categoryName)";
+
+            return $this-> getMultipleResults(
+                DAO::select($sql,['id'=>$id],true),
+                $this->className
+            );
         }
     }
