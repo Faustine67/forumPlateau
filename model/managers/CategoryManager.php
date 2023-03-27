@@ -15,24 +15,11 @@
             parent::connect();
         }
 
-        //Afficher toutes les categories
-        public function findAllCategories(){
-            $sql="SELECT *
-            FROM category
-            ORDER BY categoryName ASC";
-
-        return $this->getMultipleResults(
-            DAO::select($sql),$this->className);
-        }
-
         //AJouter une category
         public function addNewCategory(){
-            $sql="INSERT INTO category (categoryName)
-            VALUES (:categoryName)";
+            // $sql="INSERT INTO category (categoryName)
+            // VALUES (:categoryName)";
 
-            return $this-> getMultipleResults(
-                DAO::select($sql,['id'=>$id],true),
-                $this->className
-            );
+           
         }
     }

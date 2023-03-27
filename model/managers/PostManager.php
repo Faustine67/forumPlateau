@@ -36,4 +36,9 @@
                 $this->className
             );
         }
+
+          //Supprimer un post
+          public function deletePost($id){
+            $this->delete($id);    
+        }
         }

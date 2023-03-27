@@ -8,7 +8,7 @@ body{
 }
 
 h1{
-background-color: aquamarine;
+background-color: rgb(18, 111, 216);
 color: azure;
 text-align: center;
 padding: 10px 0 10px 0;
@@ -53,6 +53,7 @@ label {
     margin: 10px 0 0 0;
     width: 100%;
     min-height: 2em;
+    border-radius:15px;
   }
 
   input[type="submit"] {
@@ -61,8 +62,19 @@ label {
     margin: 1em auto;
     height: 2em;
     font-size: 1.1rem;
-    background-color: aquamarine;
+    background-color: rgb(18, 111, 216);
     border-color: white;
     min-width: 300px;
     color:white;
+    border-radius: 15px;
   }
+
+  footer{
+    position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:rgb(18, 111, 216);
+  color: white;
+  text-align: center;
+}

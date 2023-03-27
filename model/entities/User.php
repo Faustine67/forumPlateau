@@ -31,7 +31,7 @@
          */ 
         public function setId($id)
         {
-                $this->user = $id;
+                $this->id = $id;
 
                 return $this;
         }

@@ -15,17 +15,43 @@ foreach($topics as $topic ){
     <p> Crée le : <?=$topic-> getTopicDate() ?></p>
     <p> Crée par : <?=$topic-> getUser()->getNickname() ?></p>
     <?php
+        // var_dump($topic->getUser());
+        if($_SESSION["id_user"] == $topic->getUser()->getId()) { ?>
+            <p><a href="">Supprimer</a></p>
+            <p><a href="">Editer</a></p>
+        <?php }
+    ?>
+    
+    <?php
 }
 ?>
 
 <p>Ajouter un nouveau Topic</p>
-<form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId() ?>" method="POST">
+<form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId()?>" method="POST">
     <input type="text" name="topicName" maxlength="50" placeholder="Topic" required/>
     <input type="submit" name="submit" value="Ajouter"/>
 </form>
 
-<p>Supprimer un topic </p>
-<form action="index.php?ctrl=forum&action=deleteTopic&id=11" method="POST">
-    <input type="text" name="topicName" maxlength="50" placeholder="Topic" required/>
-    <input type="submit" name="submit" value="Supprimer"/>
+<label for="delete-topic">Supprimer un topic </label>
+    <form action="index.php?ctrl=forum&action=deleteTopic&id=<?=$topic->getId()?>" method="POST">
+
+ 
+    <select name="Category Name" id="id_category">
+        <?php foreach($categorie as $category){
+            ?>
+            <option value="id_category"><?=$category->getCategoryName()?></option>
+            <?php
+            } 
+            ?>
+    </select>
+
+     <select name="Topic Name" id="id_topic">
+        <?php foreach($topic as $topics){
+            ?>
+            <option value="id_topic"><?=$topics->getTopicName()?></option>
+            <?php
+            } 
+            ?>
+    </select>
+ <input type="submit" name="submit" value="Supprimer"/>
 </form>

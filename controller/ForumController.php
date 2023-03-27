@@ -23,7 +23,7 @@ namespace Controller;
             return [
                 "view" => VIEW_DIR."forum/listCategories.php",
                 "data"=> [
-                    "categories"=>$categoryManager->findAllCategories()
+                    "categories"=>$categoryManager->findAll(["categoryName", "DESC"])
                 ]
             ];
         }
@@ -37,7 +37,7 @@ namespace Controller;
             //'if(isset($id) = Si l'id de category est different de nul alors premier if, sinon on utilise else
             // Si le parametre id (de category) n'est pas null, alors on affiche les topics qui lui appartiennent, sinon on affiche tous les topics
             if(isset($id)) {
-                $topics = $topicManager->findTopicSelected($id);
+                $topics = $topicManager->findOneById($id);
             } else {
                 $topics = $topicManager->findAll(["topicName", "DESC"]);
             }
@@ -85,7 +85,7 @@ namespace Controller;
                 return[
                     "view"=> VIEW_DIR."forum/listPosts.php",
                     "data"=>[
-                        "topics"=>$topicManager->findOnebyId($id),
+                        "topic"=>$topicManager->findOnebyId($id),
                         "posts"=>$postManager->listPostSelected($id),
                     ]
                 ];
@@ -129,7 +129,7 @@ namespace Controller;
                 $user = 1;
                 
                 if($topicName && $user) {
-                    
+
                     $newTopic = $TopicManager->add(["topicName" => $topicName, "category_id" => $id,"user_id" => $user]);                    
                     $this->redirectTo('topic', $newTopic);
                 }
@@ -167,7 +167,20 @@ namespace Controller;
                 $this->redirectTo('topic', $newTopic);
             
         }
+    }
+
+        public function deletePost($id){
+            $PostManager = new PostManager();
      
+            if(isset($_POST['submit'])) {
+                
+                // $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                // $user = 1;
+                    
+                    $newPost = $PostManager->deletePost($id);                    
+                    $this->redirectTo('post', $newPost);
+                
+            }
     }
 
 

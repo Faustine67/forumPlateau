@@ -27,22 +27,20 @@
             );
         }
         // Ajouter un nouveau topic
-        public function addNewTopic($id){
-            $sql="INSERT INTO topic (topicName)
-            VALUES (:topicName)";
+        // public function addNewTopic($id){
+        //     $sql="INSERT INTO topic (topicName)
+        //     VALUES (:topicName)";
             
-            return $this-> getMultipleResults(
-                DAO::select($sql,['id'=>$id],true),
-                $this->className
-            );
-        }
+        //     return $this-> getMultipleResults(
+        //         DAO::select($sql,['id'=>$id],true),
+        //         $this->className
+        //     );
+       // }
 
         //Supprimer un topic
         public function deleteTopic($id){
-            
-            
-            $this->delete($id);
-            
+            $this->delete($id);    
         }
+        
 
     }
