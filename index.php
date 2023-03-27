@@ -20,7 +20,7 @@
     use App\Session as Session;
 
 
-    $_SESSION["id_user"] = 2;
+    $_SESSION["id_user"] = 1;
 //---------REQUETE HTTP INTERCEPTEE-----------
     $ctrlname = DEFAULT_CTRL;//on prend le controller par défaut
     //ex : index.php?ctrl=home

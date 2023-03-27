@@ -5,7 +5,7 @@ $posts = $result["data"]['posts'];
 
 ?>
 
-<h1>liste posts</h1>
+<h1>liste posts du topic <?=$topic->getTopicName()?></h1>
 
 <?php
 if($posts) {
@@ -18,21 +18,21 @@ if($posts) {
         <p>Créé par :<?=$post->getUser()->getNickName()?></p>
         <p>Créé le <?=$post->getPostdate()?></p>
         <p><?=$post->getContent()?></p>
+        <br>
         <?php
+            if($_SESSION["id_user"] == $post->getUser()->getId()) { ?>
+                <p><a href="index.php?ctrl=forum&action=deletePost&id=<?=$topic->getId()?>">Supprimer</a></p>
+                <p><a href="">Editer</a></p>
+       <?php } 
     }
-} else {
-    echo "<p>Pas de post dans ce topic</p>";
+}
+ else {
+     echo "<p> Pas de post dans ce topic</p>";
 }
 ?>
-
+<br>
 <p>Ajouter un nouveau Post au topic "<?=$topic->getTopicName()?>"</p>
 <form action="index.php?ctrl=forum&action=addNewPost&id=<?= $topic->getId() ?>" method="POST">
     <input type="text" name="content" maxlength="50" placeholder="Post" required>
-    <input type="submit" name="submit" value="Ajouter">
-</form>
-
-<p>Supprimer un post au Topic </p>
-<form action="index.php?ctrl=forum&action=deletePost&id" method="POST">
-    <input type="text" name="content" maxlength="50" placeholder="Post" required/>
-    <input type="submit" name="submit" value="Supprimer"/>
+    <input type="submit" name="submit" value="Ajouter"/>
 </form>
