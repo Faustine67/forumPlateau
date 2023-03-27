@@ -21,7 +21,7 @@ if($posts) {
         <br>
         <?php
             if($_SESSION["id_user"] == $post->getUser()->getId()) { ?>
-                <p><a href="index.php?ctrl=forum&action=deletePost&id=<?=$topic->getId()?>">Supprimer</a></p>
+                <p><a href="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>">Supprimer</a></p>
                 <p><a href="">Editer</a></p>
        <?php } 
     }

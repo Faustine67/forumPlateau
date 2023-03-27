@@ -157,32 +157,23 @@ namespace Controller;
 
         public function deleteTopic($id){
         $TopicManager = new TopicManager();
- 
-        if(isset($_POST['submit'])) {
-            
-            // $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            // $user = 1;
-                
-                $newTopic = $TopicManager->deleteTopic($id);                    
-                $this->redirectTo('topic', $newTopic);
-            
-        }
+        // $listTopic= $TopicManager->findAll();
+            // foreach qui supprime tous les posts enfants
+
+        $TopicManager->delete($id);          
+        $this->redirectTo('forum', "listTopics");
+           
     }
 
         public function deletePost($id){
             $PostManager = new PostManager();
-     
-            if(isset($_POST['submit'])) {
-                
-                // $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                // $user = 1;
-                    
-                    $newPost = $PostManager->deletePost($id);                    
-                    $this->redirectTo('post', $newPost);
-                
-            }
-    }
+            $post= $PostManager->findOneById($id);
 
+            $PostManager->delete($id); 
+            //1er argument= le controller, 2eme=la méthode,3eme=l'id (le 3eme est facultatif)  //     
+            $this->redirectTo("forum", "postSelected", $post->getTopic()->getId()); 
+        }
+    }
 
 
         // public function detailUser($id){
@@ -200,4 +191,3 @@ namespace Controller;
          
         // }
 
-    }
