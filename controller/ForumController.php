@@ -37,7 +37,7 @@ class ForumController extends AbstractController implements ControllerInterface
 		$topics = new TopicManager();
 		$posts = new PostManager();
 
-		//'if(isset($id) = Si l'id de category est different de nul alors premier if, sinon on utilise else
+		//if(isset($id) = Si l'id de category est different de nul alors premier if, sinon on utilise else
 		// Si le parametre id (de category) n'est pas null, alors on affiche les topics qui lui appartiennent, sinon on affiche tous les topics
 		if (isset($id)) {
 			$topics = $topics->findOneById($id);
