@@ -16,7 +16,7 @@ class TopicManager extends Manager
     }
 
     //Affichage des topics d'une categorie, classés par date
-    public function listTopicSelected($id)
+    public function topicSelectedByCategory($id)
     {
         $sql="SELECT *
             FROM ".$this->tableName."

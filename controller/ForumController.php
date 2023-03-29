@@ -33,58 +33,26 @@ class ForumController extends AbstractController implements ControllerInterface
 	//Afficher tous les topics par catégorie
 	public function topicSelectedByCategory($id)
 	{
-		$categorie = new CategoryManager();
-		$topics = new TopicManager();
-		$posts = new PostManager();
-
+		$categorieManager = new CategoryManager();
+		$categorie = $categorieManager->findOneById($id);
+		$topicsManager = new TopicManager();
 		//if(isset($id) = Si l'id de category est different de nul alors premier if, sinon on utilise else
 		// Si le parametre id (de category) n'est pas null, alors on affiche les topics qui lui appartiennent, sinon on affiche tous les topics
 		if (isset($id)) {
-			$topics = $topics->findOneById($id);
+			$topics = $topicsManager->topicSelectedByCategory($id);
 		} else {
-			$topics = $topics->findAll(["topicName", "DESC"]);
+			$topics = null;
 		}
 
 		return [
 			"view" => VIEW_DIR . "forum/listTopics.php",
 			"data" => [
-				"categories" => $categorie,
+				"categorie" => $categorie,
 				"topics" => $topics,
-				"posts" => $posts,
+
 			]
 		];
 	}
-
-	// public function topicSelectedByCategory($id)
-	// {
-	// 	$categoryManager = new CategoryManager();
-	// 	$topic =$topicManager->findOnebyID($id);
-	// 	$post = new PostManager();
-
-	// 	if ($id) {
-
-	// 		return [
-	// 			"view" => VIEW_DIR . "forum/listTopics.php",
-	// 			"data" => [
-	// 				"categorie" => $categoryManager->findOneById($id),
-	// 				"topics" => $topicManager->listTopicSelected($id),
-	// 				"posts" => $postManager->listTopicSelected($id),
-
-
-	// 			]
-	// 		];
-	// 	} else {
-
-	// 		return [
-	// 			"view" => VIEW_DIR . "forum/listTopics.php",
-	// 			"data" => [
-	// 				"categorie" => $categoryManager->findAll(["categoryName", "DESC"]),
-	// 				"topics" => $topicManager->findAll(["topicName", "DESC"]),
-	// 				"posts" => $postManager->findAll(["postName", "DESC"]),
-	// 			]
-	// 		];
-	// 	}
-	// }
 
 	public function postSelectedbyTopic($id)
 	{
@@ -133,16 +101,19 @@ class ForumController extends AbstractController implements ControllerInterface
 	public function addNewTopic($id)
 	{
 		$TopicManager = new TopicManager();
+		$PostManager = new PostManager();
 
 		if (isset($_POST['submit'])) {
 
 			$topicName = filter_input(INPUT_POST, "topicName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			$content = filter_input(INPUT_POST, "postName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$user = 1;
 
-			if ($topicName && $user) {
+			if ($topicName && $user && $content) {
 
 				$newTopic = $TopicManager->add(["topicName" => $topicName, "category_id" => $id, "user_id" => $user]);
-				$this->redirectTo('topic', $newTopic);
+				$newPost = $PostManager->add(["content" => $content, "topic_id" => $newTopic, "user_id" => $user]);
+				$this->redirectTo('forum', 'postSelectedbyTopic', $newTopic);
 			}
 		}
 	}
@@ -160,7 +131,7 @@ class ForumController extends AbstractController implements ControllerInterface
 			if ($content && $user) {
 
 				$newPost = $PostManager->add(["content" => $content, "topic_id" => $id, "user_id" => $user]);
-				$this->redirectTo('post', $newPost);
+				$this->redirectTo('forum', 'postSelectedbyTopic', $TopicManager->findOneById($id)->getId());
 			}
 		}
 	}

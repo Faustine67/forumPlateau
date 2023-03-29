@@ -1,18 +1,19 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
-$categorie = $result["data"]["categories"];
+$categorie = $result["data"]['categorie'];
 $topics = $result["data"]['topics'];
-$posts = $result["data"]['posts'];
+// on a pas besoin d'afficher les données du controller post. Les données seront envoyées grace à AddNewTopic, mais elles n'ont pas besooin d'être dans l'affiche.
+// on ne recupere que les données que l'on affiche.
 
 ?>
-
 <h1>liste topics de la catégorie <?= $categorie->getCategoryName() ?></h1>
 
 <?php
+
 foreach ($topics as $topic) {
 ?>
 	<div class="card">
-		<p><a href="index.php?ctrl=forum&action=postSelected&id=<?= $topic->getId() ?>"><?= $topic->getTopicName() ?></a>
+		<p><a href="index.php?ctrl=forum&action=postSelectedbyTopic&id=<?= $topic->getId() ?>"><?= $topic->getTopicName() ?></a>
 		<p> Crée le : <?= $topic->getTopicDate() ?></p><br>
 		<p> Crée par : <?= $topic->getUser()->getNickname() ?></p><br>
 		<?php
@@ -27,12 +28,13 @@ foreach ($topics as $topic) {
 	?>
 	</div>
 	<form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId() ?>" method="POST">
-	<label for="nouveau-topic">Ajouter un nouveau Topic</label>
+		<label for="nouveau-topic">Ajouter un nouveau Topic</label>
 		<input type="text" name="topicName" maxlength="50" placeholder="Topic" required />
-		<input type="submit" name="submit" value="Ajouter" />
-	</form>
-	<form action="index.php?ctrl=forum&action=addNewPost&id=<?= $posts->getId() ?>" method="POST">
-	<label for="nouveau-post">Ajouter un nouveau post/label>
-		<input type="text" name="postName" maxlength="50" placeholder="Post" required />
+
+
+
+		<label for="postName">Ajouter un nouveau post</label>
+		<textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
+
 		<input type="submit" name="submit" value="Ajouter" />
 	</form>
