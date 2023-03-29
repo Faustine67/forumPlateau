@@ -6,3 +6,10 @@
 -on hash le password (password_hash)
 -on ajoute l'user en bdd
 -on peut imaginer une redirection vers le formulaire de login dans la foulée -->
+
+<?php
+
+$user= $result["data"]["user"];
+?>
+
+<
