@@ -17,8 +17,7 @@ use Model\Managers\UserManager;
 class ForumController extends AbstractController implements ControllerInterface
 {
 
-	public function index()
-	{
+	public function index(){
 		$categoryManager = new CategoryManager();
 		//Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
 		//dont hérite chaque controller de l'application)
@@ -31,8 +30,7 @@ class ForumController extends AbstractController implements ControllerInterface
 	}
 
 	//Afficher tous les topics par catégorie
-	public function topicSelectedByCategory($id)
-	{
+	public function topicSelectedByCategory($id){
 		$categorieManager = new CategoryManager();
 		$categorie = $categorieManager->findOneById($id);
 		$topicsManager = new TopicManager();
@@ -54,8 +52,7 @@ class ForumController extends AbstractController implements ControllerInterface
 		];
 	}
 
-	public function postSelectedbyTopic($id)
-	{
+	public function postSelectedbyTopic($id){
 		$topicManager = new TopicManager();
 		$postManager = new PostManager();
 
@@ -68,7 +65,8 @@ class ForumController extends AbstractController implements ControllerInterface
 					"posts" => $postManager->listPostSelected($id),
 				]
 			];
-		} else {
+		} 
+		else {
 			return [
 				"view" => VIEW_DIR . "forum/listTopics.php",
 				"data" => [
@@ -81,8 +79,7 @@ class ForumController extends AbstractController implements ControllerInterface
 		}
 	}
 
-	public function addNewCategory()
-	{
+	public function addNewCategory(){
 		$CategoryManager = new CategoryManager();
 
 		if (isset($_POST['submit'])) {
@@ -98,8 +95,7 @@ class ForumController extends AbstractController implements ControllerInterface
 		}
 	}
 
-	public function addNewTopic($id)
-	{
+	public function addNewTopic($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
 
@@ -118,8 +114,7 @@ class ForumController extends AbstractController implements ControllerInterface
 		}
 	}
 
-	public function addNewPost($id)
-	{
+	public function addNewPost($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
 
@@ -136,8 +131,7 @@ class ForumController extends AbstractController implements ControllerInterface
 		}
 	}
 
-	public function deleteTopic($id)
-	{
+	public function deleteTopic($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
 

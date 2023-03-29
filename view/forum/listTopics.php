@@ -35,6 +35,5 @@ foreach ($topics as $topic) {
 
 		<label for="postName">Ajouter un nouveau post</label>
 		<textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
-
 		<input type="submit" name="submit" value="Ajouter" />
 	</form>

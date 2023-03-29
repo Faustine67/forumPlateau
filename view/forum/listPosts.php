@@ -33,6 +33,6 @@ if($posts) {
 <br>
 <p>Ajouter un nouveau Post au topic "<?=$topic->getTopicName()?>"</p>
 <form action="index.php?ctrl=forum&action=addNewPost&id=<?= $topic->getId() ?>" method="POST">
-    <input type="text" name="content" maxlength="50" placeholder="Post" required>
+<textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
     <input type="submit" name="submit" value="Ajouter"/>
 </form>
