@@ -13,7 +13,7 @@ use Model\Managers\UserManager;
 
 class SecurityController extends AbstractController implements ControllerInterface{
 
-public function inscription() {
+public function addNewUser() {
 $user = new UserManager();
 
     if (isset($_POST['submitSignup'])) {
@@ -32,6 +32,12 @@ $user = new UserManager();
                 if (!$userManager->findOneByUser($nickname)) {
                     //Si les 2 mots de passe concordent et que le mot de passe à un longueur
                     if (($password ==$confirmPassword) and strlen($password) >= 8) {
+					//hashage du mot de passe
+					$passwordHash = password_hash($password,PASSWORD_DEFAULT);
+					//ajout en base de données
+					$userManager->add(["email"=>$email, "nickname"=>$nickname,"password"=>$passwordHash,"role"=>"ROLE_USER"]);
+					$this->redirectTo("security","login");
+
                     }
                 }
             }

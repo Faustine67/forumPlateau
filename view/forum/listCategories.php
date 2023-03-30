@@ -23,4 +23,3 @@ foreach ($categories as $category) {
 	</label>
 	<input type="submit" name="submit" value="Ajouter">
 </form>
-</body>

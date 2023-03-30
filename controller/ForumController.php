@@ -158,20 +158,20 @@ class ForumController extends AbstractController implements ControllerInterface
 		//Poru redirectTo 1er argument= le controller, 2eme=la méthode,3eme=l'id (le 3eme est facultatif)  //     
 		$this->redirectTo("forum", "postSelected", $post->getTopic()->getId());
 	}
-}
 
 
-        // public function detailUser($id){
+        //  public function detailUser($id){
           
         //     $userManager = new UserManager();
-        //     $PostManager = new PostManager();
+        //      $PostManager = new PostManager();
  
         //      return [
         //          "view" => VIEW_DIR."forum/detailUser.php",
         //          "data" => [
-        //              "user" => $userManager->findOneById($id),
-        //              "posts" => $postManager->listPostSelected($id)
+        //               "user" => $userManager->findOneById($id),
+        //              // "posts" => $postManager->listPostSelected($id)
         //          ]
         //      ];
          
-        // }
+        }
+}

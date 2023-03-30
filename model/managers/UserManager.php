@@ -21,9 +21,9 @@
 
 		return $this->getMultipleResults(
 			DAO::select($sql, ['id' => $id], true),
-			$this->className
-		);
-}
+			$this->className);
+		}
+
 		public function findOnebyEmail($email){
             $sql = "SELECT *
             FROM ".$this->tableName." a
@@ -31,9 +31,18 @@
 
             return $this->getOneorNullResult(
                 DAO::select($sql, ['email' => $email],false),
-                $this->className
-            );
+                $this->className);
         }
+		
+		public function addNewUser (){
+
+			$sql = "INSERT INTO user (nickname,email,password) 
+					VALUES (:nickname,:email,:password)";
+
+					return $this-> getMultipleResults(
+						DAO::select($sql, ['id'=>$id], true),
+						$this->className);
+		}
     }
 
 // Dans UserManager

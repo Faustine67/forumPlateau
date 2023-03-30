@@ -32,12 +32,14 @@
 				<a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser() ?></a>
 				<a href="/security/logout.html">Déconnexion</a>
 			<?php
-			} else {
+			} 
+			else 
+			{
 			?>
-				<a href="index.php?ctrl=forum&action=connexion">Connexion</a>
-				<a href="index.php?ctrl=forum&action=inscription">Inscription</a>
+				<a href="index.php?ctrl=security&action=login">Connexion</a>
+				<a href="index.php?ctrl=security&action=register">Inscription</a>
 				<a href="index.php?ctrl=forum&action=listCategories">la liste des categories</a> <?php
-																								}
+			}
 
 
 																									?>
