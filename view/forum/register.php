@@ -7,12 +7,6 @@
 -on ajoute l'user en bdd
 -on peut imaginer une redirection vers le formulaire de login dans la foulée -->
 
-<?php
-
-$user= $result["data"]["user"];
-vard_dump($user);die;
-?>
-
 <h1> S'inscrire </h1>
  
  <form action="index.php?ctrl=security&action=addNewUser" method="POST">
@@ -28,7 +22,7 @@ vard_dump($user);die;
 	<label><b>Confirmation Mot de passe</b></label>
  	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
- 	<input type="submit" id='submit' value='LOGIN' >
+ 	<input type="submit" id='submit' value="S'inscrire" name="submitSignup" >
  	<?php
  if(isset($_GET['erreur'])){
  $err = $_GET['erreur'];
