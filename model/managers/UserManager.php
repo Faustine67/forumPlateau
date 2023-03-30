@@ -45,7 +45,7 @@
         }
 
 		public function retrievePassword(){}
-		public function getPassword(){} // Doit elle etre créée car elle est déjà dans le model/entities/User
+		public function getPassword(){} // Doit elle etre créée car elle est déjà dans le model/entities/User?
 
 
     }

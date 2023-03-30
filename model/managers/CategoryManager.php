@@ -15,8 +15,8 @@
             parent::connect();
         }
 
-        //AJouter une category
-        public function addNewCategory(){
+        //Ajouter une categorie
+        public function addNewCategory($id){
             $sql="INSERT INTO category (categoryName)
              VALUES (:categoryName)";
 
