@@ -20,6 +20,7 @@ if($posts) {
         <p><?=$post->getContent()?></p>
         <br>
         <?php
+			// Si c'est la session de l'user correspondant, il peut supprimer son post
             if($_SESSION["id_user"] == $post->getUser()->getId()) { ?>
                 <p><a href="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>">Supprimer</a></p>
                 <p><a href="">Editer</a></p>

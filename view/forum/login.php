@@ -8,13 +8,13 @@
 
 <h1> Se connecter </h1>
  
- <form action="index.php?security=forum&action=connexion" method="POST">
+ <form action="index.php?ctr=security&action=login" method="POST">
  	
 	<label><b>Email</b></label>
  	<input type="email" placeholder="Entrer l'email'" name="email" required>
 
 	<label><b>Mot de passe</b></label>
- 	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
+ 	<input type="password" placeholder="Entrer le mot de passe" name="confirmPassword" required>
 
  	<input type="submit" id='submit' value='Se connecter' name="submitLogin">
  	<?php

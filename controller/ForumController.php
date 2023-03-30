@@ -16,8 +16,21 @@ use Model\Managers\UserManager;
 
 class ForumController extends AbstractController implements ControllerInterface
 {
+	// La méthode index est égale à listCategories. Conformement à l'architecture du Forum, il est obligatoire que cette méthode existe.
+	// La méthode index peut soit etre vide ( public function index{}), soit reprendre les paramètres d'une autre fonction, en l'occurence, ceux de listCategories
+	// Ainsi, on aura la même vue que l'on soit sur indec ou sous listCategories	
+public function index(){
+		$categoryManager = new CategoryManager();
+		//Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
+		//dont hérite chaque controller de l'application)
+		return [
+			"view" => VIEW_DIR . "forum/listCategories.php",
+			"data" => [
+				"categories" => $categoryManager->findAll(["categoryName", "DESC"])
+			]
+		];}
 
-	public function index(){
+	public function listCategories(){
 		$categoryManager = new CategoryManager();
 		//Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
 		//dont hérite chaque controller de l'application)
@@ -47,6 +60,8 @@ class ForumController extends AbstractController implements ControllerInterface
 			"data" => [
 				"categorie" => $categorie,
 				"topics" => $topics,
+				"error" => "Le topic n'existe pas",
+
 
 			]
 		];
@@ -90,7 +105,7 @@ class ForumController extends AbstractController implements ControllerInterface
 			if ($categoryName && $user) {
 
 				$newCategory = $CategoryManager->add(["categoryName" => $categoryName, "user_id" => $user]);
-				$this->redirectTo('category', $newCategory);
+				$this->redirectTo('forum','listCategories',$newCategory);
 			}
 		}
 	}

@@ -24,7 +24,7 @@
 			$this->className);
 		}
 
-		public function findOnebyEmail($email){
+		public function findOneByEmail($email){
             $sql = "SELECT *
             FROM ".$this->tableName." a
             WHERE email = :email";
@@ -33,16 +33,21 @@
                 DAO::select($sql, ['email' => $email],false),
                 $this->className);
         }
-		
-		public function addNewUser (){
 
-			$sql = "INSERT INTO user (nickname,email,password) 
-					VALUES (:nickname,:email,:password)";
+		public function findOneByUser($nickname){
+            $sql = "SELECT *
+            FROM ".$this->tableName." a
+            WHERE nickname = :nickname";
 
-					return $this-> getMultipleResults(
-						DAO::select($sql, ['id'=>$id], true),
-						$this->className);
-		}
+            return $this->getOneorNullResult(
+                DAO::select($sql, ['nickname' => $nickname],false),
+                $this->className);
+        }
+
+		public function retrievePassword(){}
+		public function getPassword(){} // Doit elle etre créée car elle est déjà dans le model/entities/User
+
+
     }
 
 // Dans UserManager

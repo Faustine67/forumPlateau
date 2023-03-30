@@ -19,5 +19,10 @@
         public function addNewCategory(){
             $sql="INSERT INTO category (categoryName)
              VALUES (:categoryName)";
+
+			return $this-> getMultipleResults(
+                DAO::select($sql,['id'=>$id],true),
+                $this->className
+            );
         }
     }

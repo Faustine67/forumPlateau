@@ -9,23 +9,27 @@ $topics = $result["data"]['topics'];
 <h1>liste topics de la catégorie <?= $categorie->getCategoryName() ?></h1>
 
 <?php
-
-foreach ($topics as $topic) {
-?>
-	<div class="card">
-		<p><a href="index.php?ctrl=forum&action=postSelectedbyTopic&id=<?= $topic->getId() ?>"><?= $topic->getTopicName() ?></a>
-		<p> Crée le : <?= $topic->getTopicDate() ?></p><br>
-		<p> Crée par : <?= $topic->getUser()->getNickname() ?></p><br>
-		<?php
-		if ($_SESSION["id_user"] == $topic->getUser()->getId()) { ?>
-			<p><a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">Supprimer</a></p>
-			<p><a href="">Editer</a></p>
-		<?php }
-		?>
-	<?php
-}
-
+if($topics){
+	foreach ($topics as $topic) {
 	?>
+		<div class="card">
+			<p><a href="index.php?ctrl=forum&action=postSelectedbyTopic&id=<?= $topic->getId() ?>"><?= $topic->getTopicName() ?></a>
+			<p> Crée le : <?= $topic->getTopicDate() ?></p><br>
+			<p> Crée par : <?= $topic->getUser()->getNickname() ?></p><br>
+			<?php
+			// Si c'est la session de l'user correspondant, il peut supprimer son topic
+			if ($_SESSION["id_user"] == $topic->getUser()->getId()) { ?>
+				<p><a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">Supprimer</a></p>
+				<p><a href="">Editer</a></p>
+			<?php 
+			}
+	}
+}	
+	else {
+	echo "<p> Pas de topic dans la catégorie</p>";
+		}
+
+?>
 	</div>
 	<form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId() ?>" method="POST">
 		<label for="nouveau-topic">Ajouter un nouveau Topic</label>
