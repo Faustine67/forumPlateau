@@ -44,7 +44,15 @@
                 $this->className);
         }
 
-		public function retrievePassword(){}
+		public function retrievePassword($dbPass){
+            $sql = "SELECT *
+            FROM ".$this->tableName."
+            WHERE email = :dbPass";
+            return $this->getOneOrNullResult(
+                DAO::select($sql, ['dbPass' => $dbPass], false), 
+                $this->className
+            );
+        }
 		public function getPassword(){} // Doit elle etre créée car elle est déjà dans le model/entities/User?
 
 

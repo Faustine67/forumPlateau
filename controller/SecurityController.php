@@ -4,9 +4,9 @@ namespace Controller;
 use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
-// use Model\Managers\CategoryManager;
-// use Model\Managers\PostManager;
-// use Model\Managers\TopicManager;
+use Model\Managers\CategoryManager;
+use Model\Managers\PostManager;
+use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
 
 
@@ -59,36 +59,42 @@ class SecurityController extends AbstractController implements ControllerInterfa
 		if (isset($_POST['submitLogin'])) {
 			$email= filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
 			$password= filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+			
 			// Si les filtres passent //
 			if ($email && $password) {
 				//retrouver le mot de passe de l'utilisateur correspondant au mail
 				$dbPass=$UserManager->retrievePassword($email);
 				//si le mot de passe est retrouvé
-
+				
 				if ($dbPass) {
 					// recuperation du mot de passe
-					$hash=$dbPass->getPassword();
+					$hash=$dbPass->getPassword();	
 					//retrouver l'utilisateur par son email
 					$user=$UserManager->findOneByEmail($email);
-
+					
 					//comparaison du hash de la base de données et le mot de passe renseigné
 					if (password_verify($password, $hash)) {
 						
 						//placer l'utilisateur en Session
 						Session::setUser($user);
 						//initialisation d'un token pour toute la session user
-						$this->redirectTo("security","login");
-					
+						$log="Connexion réussie";
+
+						return[
+							"view"=> VIEW_DIR. "forum/listCategories.php",
+							"data"=>["log"=> $log]
+						];
 					}
 				}
 			}
 		} // fin if submit
-
-		return [
-				"view" => VIEW_DIR . "forum/listCategories.php",
-				"data" => []
-			];
+		else{
+			$nolog="aucun mail ne correspond";
+			return [
+					"view" => VIEW_DIR . "forum/login.php",
+					"data" => ["nolog"=>$nolog]
+				];
+		}
 	}
 }
 
