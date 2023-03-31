@@ -1,5 +1,6 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
+
 $categories = $result["data"]['categories'];
 ?>
 
@@ -15,7 +16,7 @@ foreach ($categories as $category) {
 <?php
 }
 ?>
-<form action="index.php?ctrl=forum&action=addNewCategory ?>" method="POST">
+<form action="index.php?ctrl=forum&action=addNewCategory" method="POST">
 	<label for="nouvelle-categorie">Ajouter une nouvelle catégorie:
 		<input type="text" name="categoryName" maxlength="50" placeholder="Category" required>
 	</label>

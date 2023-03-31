@@ -20,7 +20,7 @@
  	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
 	<label><b>Confirmation Mot de passe</b></label>
- 	<input type="password" placeholder="Entrer le mot de passe" name="confirmPassword" required>
+ 	<input type="password" placeholder="Confirmer le mot de passe" name="confirmPassword" required>
 
  	<input type="submit" id='submit' value="S'inscrire" name="submitSignup" >
  	</form>

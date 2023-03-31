@@ -16,13 +16,5 @@
         }
 
         //Ajouter une categorie
-        public function addNewCategory($id){
-            $sql="INSERT INTO category (categoryName)
-             VALUES (:categoryName)";
-
-			return $this-> getMultipleResults(
-                DAO::select($sql,['id'=>$id],true),
-                $this->className
-            );
-        }
+    // LA fonction add existe déjà dans le Manager
     }

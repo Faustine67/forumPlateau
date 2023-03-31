@@ -28,7 +28,8 @@ public function index(){
 			"data" => [
 				"categories" => $categoryManager->findAll(["categoryName", "DESC"])
 			]
-		];}
+		];
+	}
 
 	public function listCategories(){
 		$categoryManager = new CategoryManager();
@@ -37,7 +38,7 @@ public function index(){
 		return [
 			"view" => VIEW_DIR . "forum/listCategories.php",
 			"data" => [
-				"categories" => $categoryManager->findAll(["categoryName", "DESC"])
+				"categories" => $categoryManager->findAll()
 			]
 		];
 	}
@@ -96,15 +97,15 @@ public function index(){
 
 	public function addNewCategory(){
 		$CategoryManager = new CategoryManager();
+		// var_dump($CategoryManager);die;
 
 		if (isset($_POST['submit'])) {
-
+			
 			$categoryName = filter_input(INPUT_POST, "categoryName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$user = 1;
-
-			if ($categoryName && $user) {
-
-				$newCategory = $CategoryManager->add(["categoryName" => $categoryName, "user_id" => $user]);
+			// $user = 1;
+			if ($categoryName) {
+				
+				$newCategory = $CategoryManager->add(["categoryName" => $categoryName]);
 				$this->redirectTo('forum','listCategories',$newCategory);
 			}
 		}
