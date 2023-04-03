@@ -150,8 +150,7 @@ public function index(){
 	public function deleteTopic($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
-
-
+		$user= Session::getUser();
 		$listPost = $PostManager->listPostSelected($id);
 
 		// foreach qui supprime tous les posts enfants

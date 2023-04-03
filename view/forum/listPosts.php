@@ -31,9 +31,13 @@ if($posts) {
      echo "<p> Pas de post dans ce topic</p>";
 }
 ?>
-<br>
+<!-- Verifier si l'auteur est ban ou non -->
+<?php if ($user->getBan){ ?>
 <p>Ajouter un nouveau Post au topic "<?=$topic->getTopicName()?>"</p>
 <form action="index.php?ctrl=forum&action=addNewPost&id=<?= $topic->getId() ?>" method="POST">
 <textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
     <input type="submit" name="submit" value="Ajouter"/>
 </form>
+<?php
+ } 
+ ?>

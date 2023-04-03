@@ -96,5 +96,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
 				];
 		}
 	}
+
+	public function deconnection(){
+		$categoryManager= new CategoryManager();
+		$topicManager= new TopicManager();
+
+		session_destroy();
+
+		$this->redirectTo("topic","index");
+	}
 }
 

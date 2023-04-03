@@ -113,4 +113,24 @@
                 $this->inscriptionDate = new \DateTime($inscriptionDate);
                 return $this;
         }
+
+        public function getBan()
+        {
+                return $this->$ban;
+        }
+        public function setBan($ban):self
+        {
+                $this->ban =$ban;
+                return $this;
+        }
+
+        public function getRole()
+        {
+                return $this->$role;
+        }
+        public function setRole($role):self
+        {
+                $this->role =$role;
+                return $this;
+        }
 }
