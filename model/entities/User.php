@@ -10,6 +10,8 @@
         private $email;
         private $password;
         private $inscriptionDate;
+		private $ban;
+		private $role;
 
 
         public function __construct($data){         
@@ -103,34 +105,37 @@
          */ 
         public function getInscriptionDate(){
                 $formattedDate = $this->inscriptionDate->format("d/m/Y, H:i:s");
-                return $inscriptionDate;
+                return $formattedDate;
         }
          /**
          * Set the value of Inscription Date
          */ 
         
-        public function setInscriptiondate($inscriptionDate){
+        public function setInscriptionDate($inscriptionDate){
                 $this->inscriptionDate = new \DateTime($inscriptionDate);
                 return $this;
         }
 
+
         public function getBan()
         {
-                return $this->$ban;
+                return $this->ban;
         }
-        public function setBan($ban):self
+        public function setBan($ban)
         {
                 $this->ban =$ban;
                 return $this;
         }
 
+
+
         public function getRole()
         {
-                return $this->$role;
+                return $this->role;
         }
-        public function setRole($role):self
+        public function setRole($role)
         {
-                $this->role =$role;
+                $this->role = $role;
                 return $this;
         }
 }

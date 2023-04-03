@@ -25,6 +25,7 @@ public function index(){
 		//dont hérite chaque controller de l'application)
 		return [
 			"view" => VIEW_DIR . "forum/listCategories.php",
+		// ON reprendra cette data dans la view listCategories.php
 			"data" => [
 				"categories" => $categoryManager->findAll(["categoryName", "DESC"])
 			]

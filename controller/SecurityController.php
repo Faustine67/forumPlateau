@@ -105,5 +105,19 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
 		$this->redirectTo("topic","index");
 	}
+
+	public function profile(){
+		$userManager = new UserManager();
+
+		return[
+			"view"=>VIEW_DIR. "forum/profile.php",
+			"data"=>[
+				"user"=> \App\Session::getUser()
+			]
+		];
+	}
+
+
+
 }
 

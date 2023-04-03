@@ -21,7 +21,7 @@ if($posts) {
         <br>
         <?php
 			// Si c'est la session de l'user correspondant, il peut supprimer son post
-            if($_SESSION["id_user"] == $post->getUser()->getId()) { ?>
+            if(App\Session::getUser()->getId() == $post->getUser()->getId()) { ?>
                 <p><a href="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>">Supprimer</a></p>
                 <p><a href="">Editer</a></p>
        <?php } 
@@ -32,12 +32,12 @@ if($posts) {
 }
 ?>
 <!-- Verifier si l'auteur est ban ou non -->
-<?php if ($user->getBan){ ?>
+<!-- <?php //if ($user->getBan){ ?> -->
 <p>Ajouter un nouveau Post au topic "<?=$topic->getTopicName()?>"</p>
 <form action="index.php?ctrl=forum&action=addNewPost&id=<?= $topic->getId() ?>" method="POST">
 <textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
     <input type="submit" name="submit" value="Ajouter"/>
 </form>
 <?php
- } 
+// } 
  ?>

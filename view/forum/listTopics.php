@@ -18,7 +18,7 @@ if($topics){
 			<p> Crée par : <?= $topic->getUser()->getNickname() ?></p><br>
 			<?php
 			// Si c'est la session de l'user correspondant, il peut supprimer son topic
-			if ($_SESSION["id_user"] == $topic->getUser()->getId()) { ?>
+			if (App\Session::getUser()->getId() == $topic->getUser()->getId()) { ?>
 				<p><a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">Supprimer</a></p>
 				<p><a href="">Editer</a></p>
 			<?php 
