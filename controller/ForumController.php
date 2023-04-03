@@ -93,8 +93,17 @@ public function index(){
 
 			];
 		}
-	}
-
+	
+            return [
+                "view" => VIEW_DIR."forum/listSujets.php",
+                "data" => [
+                    "categories" => $categorieManager->findAll(["nom", "DESC"]),
+                    "sujets" => $sujetManager->listSujets(),
+                    "error" => "Aucun utilisateur n'est connecté"   
+                ]
+            ];
+            
+    }
 	public function addNewCategory(){
 		$CategoryManager = new CategoryManager();
 		// var_dump($CategoryManager);die;
@@ -114,12 +123,16 @@ public function index(){
 	public function addNewTopic($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
+		$user= Session::getUser();
 
-		if (isset($_POST['submit'])) {
 
-			$topicName = filter_input(INPUT_POST, "topicName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$content = filter_input(INPUT_POST, "postName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$user = 1;
+		// On verifie que l'utilisateur est connecté 
+		if(isset($_SESSION['user'])){
+			if (isset($_POST['submit'])) {
+
+				$topicName = filter_input(INPUT_POST, "topicName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+				$content = filter_input(INPUT_POST, "postName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+				$user = Session::getUser()->getId();
 
 			if ($topicName && $user && $content) {
 
@@ -128,50 +141,60 @@ public function index(){
 				$this->redirectTo('forum', 'postSelectedbyTopic', $newTopic);
 			}
 		}
+		}
 	}
 
 	public function addNewPost($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
+		$user= Session::getUser();
 
-		if (isset($_POST['submit'])) {
 
-			$content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$user = 1;
+		// On verifie que l'utilisateur est connecté 
+        if(isset($_SESSION['user'])) {
+			if (isset($_POST['submit'])) {
 
-			if ($content && $user) {
+				$content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+				$user =Session::getUser()->getId();
 
-				$newPost = $PostManager->add(["content" => $content, "topic_id" => $id, "user_id" => $user]);
-				$this->redirectTo('forum', 'postSelectedbyTopic', $TopicManager->findOneById($id)->getId());
+				if ($content && $user) {
+
+					$newPost = $PostManager->add(["content" => $content, "topic_id" => $id, "user_id" => $user]);
+					$this->redirectTo('forum', 'postSelectedbyTopic', $TopicManager->findOneById($id)->getId());
+				}
 			}
 		}
 	}
-
+            
 	public function deleteTopic($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
-		$user= Session::getUser();
 		$listPost = $PostManager->listPostSelected($id);
-
+		$user= Session::getUser();
+		
+		if(isset($_SESSION['user'])){
 		// foreach qui supprime tous les posts enfants
-		if (isset($listPost) && !empty($listPost)) {
+			if (isset($listPost) && !empty($listPost)) {
 
-			foreach ($listPost as $post) {
-				$PostManager->delete($post->getId());
+				foreach ($listPost as $post) {
+					$PostManager->delete($post->getId());
+				}
+				$TopicManager->delete($id);
+				$this->redirectTo('forum', "listCategories");
 			}
-			$TopicManager->delete($id);
-			$this->redirectTo('forum', "listCategories");
 		}
 	}
 
-	public function deletePost($id)
-	{
+	public function deletePost($id){
 		$PostManager = new PostManager();
 		$post = $PostManager->findOneById($id);
+		$user= Session::getUser();
 
+		if(isset($_SESSION['user'])){
 		$PostManager->delete($id);
 		//Poru redirectTo 1er argument= le controller, 2eme=la méthode,3eme=l'id (le 3eme est facultatif)  //     
 		$this->redirectTo("forum", "postSelected", $post->getTopic()->getId());
+		}
 	}
 
 

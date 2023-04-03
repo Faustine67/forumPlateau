@@ -97,7 +97,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
 		}
 	}
 
-	public function deconnection(){
+	public function deconnexion(){
 		$categoryManager= new CategoryManager();
 		$topicManager= new TopicManager();
 
