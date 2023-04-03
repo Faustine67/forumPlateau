@@ -34,6 +34,8 @@ public function index(){
 
 	public function listCategories(){
 		$categoryManager = new CategoryManager();
+		$user= Session::getUser();
+
 		//Il faudra aussi comprendre que la méthode "findAll" est une méthode générique qui provient de Manager.php
 		//dont hérite chaque controller de l'application)
 		return [
@@ -49,9 +51,11 @@ public function index(){
 		$categorieManager = new CategoryManager();
 		$categorie = $categorieManager->findOneById($id);
 		$topicsManager = new TopicManager();
+		$user= Session::getUser();
+
 		//if(isset($id) = Si l'id de category est different de nul alors premier if, sinon on utilise else
 		// Si le parametre id (de category) n'est pas null, alors on affiche les topics qui lui appartiennent, sinon on affiche tous les topics
-		if (isset($id)) {
+		if (isset($_SESSION['user'])) {
 			$topics = $topicsManager->topicSelectedByCategory($id);
 		} else {
 			$topics = null;
@@ -62,6 +66,7 @@ public function index(){
 			"data" => [
 				"categorie" => $categorie,
 				"topics" => $topics,
+				"user"=>$user,
 				"error" => "Le topic n'existe pas",
 
 
@@ -72,14 +77,18 @@ public function index(){
 	public function postSelectedbyTopic($id){
 		$topicManager = new TopicManager();
 		$postManager = new PostManager();
+		$user= Session::getUser();
 
-		if ($id) {
+
+		if (isset($_SESSION['user'])) {
 
 			return [
 				"view" => VIEW_DIR . "forum/listPosts.php",
 				"data" => [
+					"user"=>$user,
 					"topic" => $topicManager->findOnebyId($id),
 					"posts" => $postManager->listPostSelected($id),
+
 				]
 			];
 		} 
@@ -89,6 +98,7 @@ public function index(){
 				"data" => [
 					"topics" => $topicManager->findAll(["topicName", "DESC"]),
 					"posts" => $postManager->findAll(["content", "DESC"]),
+					"user"=>$user,
 					"error" => "Le topic n'existe pas",
 				]
 
@@ -107,6 +117,8 @@ public function index(){
     }
 	public function addNewCategory(){
 		$CategoryManager = new CategoryManager();
+		$user= Session::getUser();
+
 		// var_dump($CategoryManager);die;
 
 		if (isset($_POST['submit'])) {
@@ -139,6 +151,7 @@ public function index(){
 
 				$newTopic = $TopicManager->add(["topicName" => $topicName, "category_id" => $id, "user_id" => $user]);
 				$newPost = $PostManager->add(["content" => $content, "topic_id" => $newTopic, "user_id" => $user]);
+				$user = Session::getUser()->getId();
 				$this->redirectTo('forum', 'postSelectedbyTopic', $newTopic);
 			}
 		}
@@ -161,7 +174,9 @@ public function index(){
 				if ($content && $user) {
 
 					$newPost = $PostManager->add(["content" => $content, "topic_id" => $id, "user_id" => $user]);
-					$this->redirectTo('forum', 'postSelectedbyTopic', $TopicManager->findOneById($id)->getId());
+					$user = Session::getUser()->getId();
+
+					$this->redirectTo('forum', 'postSelectedbyTopic', $newPost);
 				}
 			}
 		}
@@ -198,18 +213,4 @@ public function index(){
 		}
 	}
 
-
-        //  public function detailUser($id){
-          
-        //     $userManager = new UserManager();
-        //      $PostManager = new PostManager();
- 
-        //      return [
-        //          "view" => VIEW_DIR."forum/detailUser.php",
-        //          "data" => [
-        //               "user" => $userManager->findOneById($id),
-        //              // "posts" => $postManager->listPostSelected($id)
-        //          ]
-        //      ];
-         
-        }
+}

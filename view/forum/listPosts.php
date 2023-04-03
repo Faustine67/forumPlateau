@@ -1,7 +1,9 @@
 <?php
 // Exemple de comment recuperer les données envoyées par le controller //
 $topic = $result["data"]["topic"];
-$posts = $result["data"]['posts']; 
+$posts = $result["data"]['posts'];
+$user= $result["data"]["user"];
+
 
 ?>
 
@@ -21,19 +23,21 @@ if($posts) {
         <br>
         <?php
 			// Si c'est la session de l'user correspondant, il peut supprimer son post
-            if(App\Session::getUser()->getId() == $post->getUser()->getId()) { ?>
+            if(App\Session::getUser()->getId() == $post->getUser()->getId()) { 
+				?>
                 <p><a href="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>">Supprimer</a></p>
                 <p><a href="">Editer</a></p>
-       <?php } 
+       		<?php 
+			}
     }
 }
  else {
      echo "<p> Pas de post dans ce topic</p>";
 }
 ?>
-<!-- Verifier si l'auteur est ban ou non -->
-<!-- <?php //if ($user->getBan){ ?> -->
+
 <p>Ajouter un nouveau Post au topic "<?=$topic->getTopicName()?>"</p>
+
 <form action="index.php?ctrl=forum&action=addNewPost&id=<?= $topic->getId() ?>" method="POST">
 <textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
     <input type="submit" name="submit" value="Ajouter"/>

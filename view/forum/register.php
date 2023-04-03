@@ -24,14 +24,5 @@
 
  	<input type="submit" id='submit' value="S'inscrire" name="submitSignup" >
  	</form>
- 	<?php
-
-// if(isset($error)){
-//     echo "<p>".$error."</p>";
-// }
-// if(isset($success)){
-//     echo "<p>".$success."</p>";
-// }
- ?>
 
 

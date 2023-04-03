@@ -2,6 +2,7 @@
 // Exemple de comment recuperer les données envoyées par le controller //
 $categorie = $result["data"]['categorie'];
 $topics = $result["data"]['topics'];
+$user= $result["data"]["user"];
 // on a pas besoin d'afficher les données du controller post. Les données seront envoyées grace à AddNewTopic, mais elles n'ont pas besooin d'être dans l'affiche.
 // on ne recupere que les données que l'on affiche.
 

@@ -56,6 +56,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
 	// méthode login
 	public function login (){
 		$UserManager = new UserManager();
+		$categoryManager = new CategoryManager();
+
 		if (isset($_POST['submitLogin'])) {
 			$email= filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
 			$password= filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -72,29 +74,29 @@ class SecurityController extends AbstractController implements ControllerInterfa
 					//retrouver l'utilisateur par son email
 					$user=$UserManager->findOneByEmail($email);
 					
-					//comparaison du hash de la base de données et le mot de passe renseigné
-					if (password_verify($password, $hash)) {
-						
-						//placer l'utilisateur en Session
-						Session::setUser($user);
-						//initialisation d'un token pour toute la session user
-						$log="Connexion réussie";
+					if($user) {
+						if (password_verify($password, $hash)) {
+							
+							//placer l'utilisateur en Session
+							Session::setUser($user);
+							//initialisation d'un token pour toute la session user
+							$log="Connexion réussie";
 
-						return[
-							"view"=> VIEW_DIR. "forum/listCategories.php",
-							"data"=>["log"=> $log]
-						];
+							$this->redirectTo('forum','listCategories');
+						}
+						//comparaison du hash de la base de données et le mot de passe renseigné
+					}
+					else{
+						$this->redirectTo('security','login');
 					}
 				}
 			}
 		} // fin if submit
-		else{
-			$nolog="aucun mail ne correspond";
-			return [
-					"view" => VIEW_DIR . "forum/login.php",
-					"data" => ["nolog"=>$nolog]
-				];
-		}
+
+			return[
+				"view"=>VIEW_DIR. "forum/login.php",
+				"data"=>[]
+			];
 	}
 
 	public function deconnexion(){

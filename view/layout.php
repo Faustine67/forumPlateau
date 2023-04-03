@@ -30,7 +30,7 @@
 			if (App\Session::getUser()) {
 			?>
 				<a href="index.php?ctrl=security&action=profile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()->getId() ?></a>
-				<a href="/security/logout.html">Déconnexion</a>
+				<a href="index.php?ctrl=security&action=deconnexion">Deconnexion</a>
 				<a href="index.php?ctrl=forum&action=listCategories">la liste des categories</a>
 			<?php
 			} 
@@ -39,7 +39,6 @@
 			?>
 				<a href="index.php?ctrl=security&action=login">Connexion</a>
 				<a href="index.php?ctrl=security&action=register">Inscription</a>
-				<a href="index.php?ctrl=security&action=deconnexion">Deconnexion</a>
 				<a href="index.php?ctrl=forum&action=listCategories">la liste des categories</a> <?php
 			}
 

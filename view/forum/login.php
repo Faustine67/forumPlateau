@@ -19,7 +19,3 @@
  	<input type="submit" id='submit' value='Se connecter' name="submitLogin">
  
  </form>
-
- <?php 
-if(isset($nolog)){
-    echo "<p>".$nolog."</p>";}
