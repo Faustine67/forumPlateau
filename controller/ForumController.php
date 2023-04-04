@@ -190,17 +190,19 @@ public function index(){
 		$user= Session::getUser();
 		
 		if(isset($_SESSION['user'])){
-		// foreach qui supprime tous les posts enfants
-			if (isset($listPost) && !empty($listPost)) {
-
-				foreach ($listPost as $post) {
-					$PostManager->delete($post->getId());
+			if($user && ($user->getRole() == "admin" || $user->getRole() == "moderator")){
+				
+				if (isset($listPost) && !empty($listPost)) {
+					// foreach qui supprime tous les posts enfants
+					foreach ($listPost as $post) {
+						$PostManager->delete($post->getId());
+					}
+					$TopicManager->delete($id);
+					$this->redirectTo('forum', "listCategories");
 				}
-				$TopicManager->delete($id);
-				$this->redirectTo('forum', "listCategories");
 			}
 		}
-	}
+	}	
 
 	public function deletePost($id){
 		$PostManager = new PostManager();
