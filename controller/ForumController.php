@@ -159,7 +159,6 @@ public function index(){
 	}
 
 	public function addNewPost($id){
-		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
 		$user= Session::getUser();
 
@@ -173,10 +172,10 @@ public function index(){
 
 				if ($content && $user) {
 
-					$newPost = $PostManager->add(["content" => $content, "topic_id" => $id, "user_id" => $user]);
+					$PostManager->add(["content" => $content, "topic_id" => $id, "user_id" => $user]);
 					$user = Session::getUser()->getId();
 
-					$this->redirectTo('forum', 'postSelectedbyTopic', $newPost);
+					$this->redirectTo('forum', 'postSelectedbyTopic', $id);
 				}
 			}
 		}
