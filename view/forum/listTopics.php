@@ -14,9 +14,10 @@ if($topics){
 	foreach ($topics as $topic) {
 	?>
 		<div class="card">
-			<p><a href="index.php?ctrl=forum&action=postSelectedbyTopic&id=<?= $topic->getId() ?>"><?= $topic->getTopicName() ?></a>
+		<p><a href="index.php?ctrl=forum&action=postSelectedbyTopic&id=<?= $topic->getId() ?>"><?= $topic->getTopicName() ?></a></p>
 			<p> Crée le : <?= $topic->getTopicDate() ?></p><br>
-			<p> Crée par : <?= $topic->getUser()->getNickname() ?></p><br>
+			<p> Crée par :<a href="index.php?ctrl=forum&action=infosOtherUser&id=<?= $topic->getUser()->getId() ?>"><?= $topic->getUser()->getNickname() ?></a></p>
+				
 			<?php
 			// Si c'est la session de l'user correspondant, il peut supprimer son topic
 			if ((App\Session::getUser()->getId() == $topic->getUser()->getId())||(($_SESSION["user"]->getRole()=="admin") || ($_SESSION["user"]->getRole()=="moderator")) ) { ?>
@@ -31,8 +32,7 @@ if($topics){
 		}
 
 ?>
-	</div>
-	<?php if(isset($_SESSION["user"]) &&(($_SESSION["user"]->getRole()=="admin") || ($_SESSION["user"]->getRole()=="moderator"))) { ?>
+	</div class="form">
 
 		<form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId() ?>" method="POST">
 			<label for="nouveau-topic">Ajouter un nouveau Topic</label>
@@ -44,6 +44,4 @@ if($topics){
 			<textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
 			<input type="submit" name="submit" value="Ajouter" />
 		</form>
-	<?php
-	} 
-	?>
+	</div>

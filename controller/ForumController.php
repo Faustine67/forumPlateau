@@ -140,7 +140,6 @@ public function index(){
 
 		// On verifie que l'utilisateur est connecté 
 		if(isset($_SESSION['user'])){
-			if($user && ($user->getRole() == "admin" || $user->getRole() == "moderator")){
 
 			if (isset($_POST['submit'])) {
 
@@ -158,7 +157,7 @@ public function index(){
 		}
 		}
 	}
-}
+
 
 	public function addNewPost($id){
 		$PostManager = new PostManager();
@@ -190,7 +189,7 @@ public function index(){
 		$user= Session::getUser();
 		
 		if(isset($_SESSION['user'])){
-			if($user && ($user->getRole() == "admin" || $user->getRole() == "moderator")){
+			if($user && ($user->getRole() == "admin" || $user->getRole() == "moderator" )){
 				
 				if (isset($listPost) && !empty($listPost)) {
 					// foreach qui supprime tous les posts enfants
@@ -214,6 +213,18 @@ public function index(){
 		//Poru redirectTo 1er argument= le controller, 2eme=la méthode,3eme=l'id (le 3eme est facultatif)  //     
 		$this->redirectTo("forum", "postSelected", $post->getTopic()->getId());
 		}
+	}
+
+	public function infosOtherUser($id){
+		$userManager= new UserManager();
+		$user= Session::getUser();
+	
+		return[
+			"view"=> VIEW_DIR."forum/profile.php",
+			"data"=>[
+				"user" => $userManager->findOneById($id)
+			]
+		];
 	}
 
 }

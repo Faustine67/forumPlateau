@@ -17,7 +17,7 @@ if($posts) {
         lorsque l'on appelle GetTopic, on obtient une "entité" entiere, 
         il faut par la suite preciser l'info que l'on veut dans cette "entité" -->
         <p>Appartient au topic: <?=$post->getTopic()->getTopicName()?></p>
-        <p>Créé par :<?=$post->getUser()->getNickName()?></p>
+        <p> Crée par :<a href="index.php?ctrl=forum&action=infosOtherUser&id=<?= $post->getUser()->getId() ?>"><?= $post->getUser()->getNickname() ?></a></p>
         <p>Créé le <?=$post->getPostdate()?></p>
         <p><?=$post->getContent()?></p>
         <br>
