@@ -119,20 +119,20 @@ public function index(){
 		$CategoryManager = new CategoryManager();
 		$user= Session::getUser();
 
-		// var_dump($CategoryManager);die;
+		if(isset($_SESSION["user"]) && ($_SESSION["user"]->getRole()=="admin")){
 
-		if (isset($_POST['submit'])) {
-			
-			$categoryName = filter_input(INPUT_POST, "categoryName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			// $user = 1;
-			if ($categoryName) {
+			if (isset($_POST['submit'])) {
 				
-				$newCategory = $CategoryManager->add(["categoryName" => $categoryName]);
-				$this->redirectTo('forum','listCategories',$newCategory);
-			}
+				$categoryName = filter_input(INPUT_POST, "categoryName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+				// $user = 1;
+				if ($categoryName) {
+					
+					$newCategory = $CategoryManager->add(["categoryName" => $categoryName]);
+					$this->redirectTo('forum','listCategories',$newCategory);
+				}
+		}
 		}
 	}
-
 	public function addNewTopic($id){
 		$TopicManager = new TopicManager();
 		$PostManager = new PostManager();
