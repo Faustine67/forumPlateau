@@ -119,8 +119,7 @@ public function index(){
 		$CategoryManager = new CategoryManager();
 		$user= Session::getUser();
 
-		if(isset($_SESSION["user"]) && ($_SESSION["user"]->getRole()=="admin")){
-
+		if($user && $user->getRole() == "admin"){
 			if (isset($_POST['submit'])) {
 				
 				$categoryName = filter_input(INPUT_POST, "categoryName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -141,6 +140,8 @@ public function index(){
 
 		// On verifie que l'utilisateur est connecté 
 		if(isset($_SESSION['user'])){
+			if($user && ($user->getRole() == "admin" || $user->getRole() == "moderator")){
+
 			if (isset($_POST['submit'])) {
 
 				$topicName = filter_input(INPUT_POST, "topicName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -150,13 +151,14 @@ public function index(){
 			if ($topicName && $user && $content) {
 
 				$newTopic = $TopicManager->add(["topicName" => $topicName, "category_id" => $id, "user_id" => $user]);
-				$newPost = $PostManager->add(["content" => $content, "topic_id" => $newTopic, "user_id" => $user]);
+				$PostManager->add(["content" => $content, "topic_id" => $newTopic, "user_id" => $user]);
 				$user = Session::getUser()->getId();
 				$this->redirectTo('forum', 'postSelectedbyTopic', $newTopic);
 			}
 		}
 		}
 	}
+}
 
 	public function addNewPost($id){
 		$PostManager = new PostManager();

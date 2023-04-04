@@ -32,13 +32,18 @@ if($topics){
 
 ?>
 	</div>
-	<form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId() ?>" method="POST">
-		<label for="nouveau-topic">Ajouter un nouveau Topic</label>
-		<input type="text" name="topicName" maxlength="50" placeholder="Topic" required />
+	<?php if(isset($_SESSION["user"]) &&(($_SESSION["user"]->getRole()=="admin") || ($_SESSION["user"]->getRole()=="moderator"))) { ?>
+
+		<form action="index.php?ctrl=forum&action=addNewTopic&id=<?= $categorie->getId() ?>" method="POST">
+			<label for="nouveau-topic">Ajouter un nouveau Topic</label>
+			<input type="text" name="topicName" maxlength="50" placeholder="Topic" required />
 
 
 
-		<label for="postName">Ajouter un nouveau post</label>
-		<textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
-		<input type="submit" name="submit" value="Ajouter" />
-	</form>
+			<label for="postName">Ajouter un nouveau post</label>
+			<textarea id="postName" name="postName" placeholder="Post" required rows="5" cols="33"> </textarea>
+			<input type="submit" name="submit" value="Ajouter" />
+		</form>
+	<?php
+	} 
+	?>
